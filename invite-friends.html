@@ -6,29 +6,43 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invite Friends</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="material/css/styles.css">
+    <link rel="stylesheet" href="material/css/st.css">
 </head>
 
 <body>
-
-    <div class="container">
-        <h1>Invite Friends</h1>
-        <p>Share your referral link with friends and earn rewards!</p>
-
-        <div class="referral-section">
-            <input type="text" id="referralLink" value="Fetching your referral link..." readonly>
+    <div class="frens-invite">
+        <div class="frens-invite-button">
+            <input type="text" id="referralLink" value="Loading your referral link..." readonly>
             <button id="copyButton">Copy Link</button>
-            <button id="shareButton">Share on Telegram</button>
         </div>
-
-        <nav class="bottom-nav">
-            <a href="home.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
-            <a href="leaderboard.html" class="nav-item"><i class="fas fa-trophy"></i> Leaderboard</a>
-            <a href="invite.html" class="nav-item"><i class="fas fa-user-friends"></i> Invite</a>
-            <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i> Tasks</a>
-            <a href="balance.html" class="nav-item"><i class="fas fa-wallet"></i> Balance</a>
-        </nav>
     </div>
+
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
+    <script src="material/js/cojs.js"></script>
+    <script src="material/js/scripts.js"></script>
 
     <script>
         const apiUrl = "https://67496dde868020296630f628.mockapi.io/Api/1/Fox"; // Your MockAPI link
@@ -36,7 +50,6 @@
 
         const referralLinkInput = document.getElementById("referralLink");
         const copyButton = document.getElementById("copyButton");
-        const shareButton = document.getElementById("shareButton");
 
         // Fetch the user's unique referral code from MockAPI
         async function fetchReferralLink() {
@@ -67,92 +80,9 @@
             alert("Referral link copied successfully!");
         });
 
-        // Share the referral link on Telegram
-        shareButton.addEventListener("click", () => {
-            const referralLink = referralLinkInput.value;
-            const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Join%20me%20on%20this%20platform!`;
-
-            window.open(telegramShareUrl, "_blank");
-        });
-
         // Initialize
         fetchReferralLink();
     </script>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #1a1a1a;
-            color: #ffffff;
-        }
-
-        .container {
-            padding: 20px;
-            text-align: center;
-        }
-
-        .referral-section {
-            margin: 20px auto;
-            max-width: 400px;
-            text-align: center;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            background-color: #f5f5f5;
-            color: #333;
-        }
-
-        button {
-            padding: 10px 20px;
-            margin: 5px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        #copyButton {
-            background-color: #4caf50;
-            color: white;
-        }
-
-        #shareButton {
-            background-color: #0088cc;
-            color: white;
-        }
-
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #333;
-            display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-        }
-
-        .nav-item {
-            color: #ffffff;
-            text-align: center;
-            font-size: 14px;
-            text-decoration: none;
-        }
-
-        .nav-item i {
-            font-size: 20px;
-            display: block;
-        }
-
-        .nav-item:hover {
-            color: #4caf50;
-        }
-    </style>
 
 </body>
 
