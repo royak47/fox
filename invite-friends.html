@@ -6,13 +6,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invite Friends</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>Invite Friends</h1>
+        <p>Share your referral link with friends and earn rewards!</p>
+
+        <div class="referral-section">
+            <input type="text" id="referralLink" value="Fetching your referral link..." readonly>
+            <button id="copyButton">Copy Link</button>
+            <button id="shareButton">Share on Telegram</button>
+        </div>
+
+        <nav class="bottom-nav">
+            <a href="home.html" class="nav-item"><i class="fas fa-home"></i> Home</a>
+            <a href="leaderboard.html" class="nav-item"><i class="fas fa-trophy"></i> Leaderboard</a>
+            <a href="invite.html" class="nav-item"><i class="fas fa-user-friends"></i> Invite</a>
+            <a href="tasks.html" class="nav-item"><i class="fas fa-tasks"></i> Tasks</a>
+            <a href="balance.html" class="nav-item"><i class="fas fa-wallet"></i> Balance</a>
+        </nav>
+    </div>
+
+    <script>
+        const apiUrl = "https://67496dde868020296630f628.mockapi.io/Api/1/Fox"; // Your MockAPI link
+        const botLink = "https://t.me/FOXOG_BOT";
+
+        const referralLinkInput = document.getElementById("referralLink");
+        const copyButton = document.getElementById("copyButton");
+        const shareButton = document.getElementById("shareButton");
+
+        // Fetch the user's unique referral code from MockAPI
+        async function fetchReferralLink() {
+            try {
+                const response = await fetch(apiUrl);
+                if (!response.ok) throw new Error(`API responded with status ${response.status}`);
+
+                const users = await response.json();
+                if (users.length === 0) throw new Error("No users found in MockAPI.");
+
+                const currentUser = users[0]; // Assuming the first user in the list is the current user
+                const referralCode = currentUser.referralCode || "defaultCode";
+                const referralLink = `${botLink}?startapp=${referralCode}`;
+
+                referralLinkInput.value = referralLink;
+            } catch (error) {
+                referralLinkInput.value = "Error fetching referral link.";
+                console.error("Error:", error.message);
+            }
+        }
+
+        // Copy the referral link to clipboard
+        copyButton.addEventListener("click", () => {
+            referralLinkInput.select();
+            navigator.clipboard.writeText(referralLinkInput.value);
+            alert("Referral link copied successfully!");
+        });
+
+        // Share the referral link on Telegram
+        shareButton.addEventListener("click", () => {
+            const referralLink = referralLinkInput.value;
+            const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Join%20me%20on%20this%20platform!`;
+
+            window.open(telegramShareUrl, "_blank");
+        });
+
+        // Initialize
+        fetchReferralLink();
+    </script>
+
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #1e1e2f;
-            color: #fff;
+            background-color: #1a1a1a;
+            color: #ffffff;
         }
 
         .container {
@@ -20,152 +91,67 @@
             text-align: center;
         }
 
-        .title {
-            font-size: 24px;
-            margin-bottom: 10px;
-        }
-
-        .subtitle {
-            font-size: 16px;
-            margin-bottom: 20px;
-            color: #b3b3b3;
-        }
-
-        .referral-box {
-            background: #2a2a3c;
-            padding: 15px;
-            border-radius: 10px;
+        .referral-section {
             margin: 20px auto;
             max-width: 400px;
-            box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
-        .referral-box input {
-            width: calc(100% - 40px);
+        input[type="text"] {
+            width: 100%;
             padding: 10px;
-            margin-right: 10px;
-            border: none;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
             border-radius: 5px;
-            background: #3a3a4c;
-            color: #fff;
-            font-size: 14px;
+            background-color: #f5f5f5;
+            color: #333;
         }
 
-        .referral-box button {
-            padding: 10px 15px;
+        button {
+            padding: 10px 20px;
+            margin: 5px;
             border: none;
             border-radius: 5px;
-            background: #4caf50;
-            color: #fff;
-            font-size: 14px;
             cursor: pointer;
         }
 
-        .referral-box button:hover {
-            background: #45a049;
+        #copyButton {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        #shareButton {
+            background-color: #0088cc;
+            color: white;
         }
 
         .bottom-nav {
             position: fixed;
             bottom: 0;
-            left: 0;
-            right: 0;
-            background: #2a2a3c;
+            width: 100%;
+            background-color: #333;
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
-            box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.2);
         }
 
         .nav-item {
-            color: #fff;
-            text-decoration: none;
-            font-size: 14px;
+            color: #ffffff;
             text-align: center;
+            font-size: 14px;
+            text-decoration: none;
         }
 
         .nav-item i {
-            font-size: 18px;
+            font-size: 20px;
             display: block;
-            margin-bottom: 5px;
         }
 
-        .success {
+        .nav-item:hover {
             color: #4caf50;
-            font-size: 14px;
-            margin-top: 10px;
         }
     </style>
-</head>
 
-<body>
-    <div class="container">
-        <h1 class="title">Invite Friends</h1>
-        <p class="subtitle">Share your unique referral link and earn rewards!</p>
-
-        <div id="referral-container" class="referral-box">
-            <input type="text" id="referralLink" readonly>
-            <button id="copyButton">Copy Link</button>
-        </div>
-
-        <p id="copySuccess" class="success" style="display: none;">Referral link copied successfully!</p>
-    </div>
-
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i> HOME
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i> LEADERBOARD
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i> FRIENDS
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i> TASKS
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i> BALANCE
-        </a>
-    </nav>
-
-    <script>
-        const apiUrl = "https://64ef996ed55b3e3fde667340.mockapi.io/users";
-        const referralLinkInput = document.getElementById("referralLink");
-        const copyButton = document.getElementById("copyButton");
-        const copySuccess = document.getElementById("copySuccess");
-
-        // Fetch user data and generate a unique referral link
-        async function fetchReferralLink() {
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) {
-                    throw new Error("Failed to fetch referral link.");
-                }
-                const users = await response.json();
-                const currentUser = users[0]; // Replace with logic to identify the current user
-                const referralCode = currentUser.referralCode || "defaultCode";
-                const referralLink = `https://t.me/FOXOG_BOT/FOX?startapp=${referralCode}`;
-                referralLinkInput.value = referralLink;
-            } catch (error) {
-                referralLinkInput.value = "Error fetching referral link.";
-                console.error(error);
-            }
-        }
-
-        // Copy referral link to clipboard
-        copyButton.addEventListener("click", () => {
-            referralLinkInput.select();
-            document.execCommand("copy");
-            copySuccess.style.display = "block";
-            setTimeout(() => {
-                copySuccess.style.display = "none";
-            }, 2000);
-        });
-
-        // Initialize referral link
-        fetchReferralLink();
-    </script>
 </body>
 
 </html>
