@@ -4,12 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Complete Tasks</title>
+    <title>Home</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: "Roboto", Arial, sans-serif;
             text-align: center;
             background: linear-gradient(135deg, #1e293b, #0f172a);
             color: #f8fafc;
@@ -27,87 +27,32 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        #balance-container {
-            margin: 20px;
-            font-size: 22px;
-            background: linear-gradient(135deg, #06b6d4, #0284c7);
-            padding: 15px;
-            border-radius: 12px;
-            display: inline-block;
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
-
-        .task-container {
-            margin: 20px auto;
-            max-width: 600px;
-        }
-
-        .task {
-            margin: 15px auto;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 80%;
-            color: #fff;
-        }
-
-        .task:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
-        }
-
-        .task-detail {
-            display: flex;
-            align-items: center;
-        }
-
-        .task-image img {
-            border-radius: 8px;
-            margin-right: 10px;
-        }
-
-        .task h4 {
-            margin: 0;
-            font-size: 18px;
+        h1 {
+            margin: 20px 0;
+            font-size: 28px;
             color: #e0f2fe;
         }
 
-        .task-data {
-            display: flex;
-            align-items: center;
-            margin-top: 8px;
+        p {
+            font-size: 16px;
+            margin-bottom: 40px;
+            color: #94a3b8;
         }
 
-        .task-data img {
-            margin-right: 5px;
-        }
-
-        .task-data h5 {
-            margin: 0;
-            color: #facc15;
-            font-size: 18px;
-        }
-
-        .task-button {
+        .btn {
             background: linear-gradient(135deg, #34d399, #059669);
             color: #fff;
-            border: none;
             padding: 10px 20px;
-            font-size: 16px;
-            cursor: pointer;
+            border: none;
             border-radius: 8px;
+            font-size: 16px;
+            text-decoration: none;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .task-button:hover {
+        .btn:hover {
             background: linear-gradient(135deg, #86efac, #34d399);
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
         .bottom-nav {
@@ -126,115 +71,57 @@
             color: #fff;
             text-align: center;
             font-size: 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .nav-item i {
             font-size: 20px;
-            display: block;
             margin-bottom: 5px;
         }
 
         .nav-item:hover {
             color: #34d399;
         }
-
-        @media (max-width: 600px) {
-            .task-container {
-                max-width: 100%;
-            }
-
-            .task-button {
-                padding: 10px 15px;
-                font-size: 14px;
-            }
-
-            .task h4 {
-                font-size: 16px;
-            }
-
-            #balance-container {
-                font-size: 18px;
-                padding: 10px;
-            }
-        }
     </style>
 </head>
 
 <body>
+    <!-- Centered Logo -->
     <div id="logo-container">
-        <img src="material/images/logo.png" alt="Logo">
+        <img src="material/images/logo.png" alt="Fox Logo">
     </div>
 
-    <div id="balance-container">
-        <h2><b></b></h2>
-        <span id="balance">0</span> 🦊 Total fox
-    </div>
+    <!-- Welcome Section -->
+    <h1>Welcome to Fox Rewards!</h1>
+    <p>Complete tasks, earn rewards, and grow your fox wallet. Click below to get started!</p>
+    <a href="task.html" class="btn">Start Earning</a>
 
-    <div class="task-container">
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/logo.png" width="45px" alt="">
-                </div>
-                <div>
-                    <h4>Claim Rewards</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>300</h5>
-                    </div>
-                </div>
-            </div>
-            <button class="task-button" onclick="completeTask(300, 'reword.html')"> 🦊 Claim</button>
-        </div>
-
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/ver.gif" width="45px" alt="Verification">
-                </div>
-                <div>
-                    <h4>Verify and Earn</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>200</h5>
-                    </div>
-                </div>
-            </div>
-            <button class="task-button" onclick="completeTask(200, 'verify.html')"> 🦊 Claim</button>
-        </div>
-    </div>
-
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
-            <span>HOME</span>
+            <span>Home</span>
         </a>
         <a href="game.html" class="nav-item">
             <i class="fas fa-gamepad"></i>
-            <span>GAME PLAY</span>
+            <span>Game</span>
         </a>
         <a href="invite-friends.html" class="nav-item">
             <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
+            <span>Friends</span>
         </a>
         <a href="task.html" class="nav-item">
             <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
+            <span>Tasks</span>
         </a>
         <a href="balance.html" class="nav-item">
             <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
+            <span>Balance</span>
         </a>
     </nav>
-
-    <script>
-        function completeTask(amount, redirectUrl) {
-            const balanceElement = document.getElementById('balance');
-            const currentBalance = parseInt(balanceElement.textContent);
-            balanceElement.textContent = currentBalance + amount;
-            window.location.href = redirectUrl;
-        }
-    </script>
 </body>
 
 </html>
