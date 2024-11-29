@@ -58,6 +58,19 @@
             display: none; /* Hidden by default, will show when game starts */
         }
 
+        .game-over-message {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 24px;
+            display: none; /* Initially hidden */
+        }
+
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -94,6 +107,7 @@
         <button class="play-button" onclick="startGame()">Play Snake Game</button>
         <div class="game-board" id="snakeBoard">
             <canvas id="canvas"></canvas>
+            <div id="gameOverMessage" class="game-over-message">Game Over! Your score: <span id="finalScore"></span></div>
         </div>
     </div>
 
@@ -133,10 +147,14 @@
         let food = { x: 0, y: 0 };
         let score = 0;
 
+        const gameOverMessage = document.getElementById("gameOverMessage");
+        const finalScore = document.getElementById("finalScore");
+
         // Show the game canvas when the button is clicked
         function startGame() {
             document.querySelector(".game-board").style.display = "block"; // Show game board
             document.querySelector(".play-button").style.display = "none"; // Hide play button
+            gameOverMessage.style.display = "none"; // Hide the "Game Over" message
             canvas.width = canvasSize;  // Set canvas width
             canvas.height = canvasSize;  // Set canvas height
             document.addEventListener("keydown", changeDirection);
@@ -148,8 +166,8 @@
         function update() {
             moveSnake();
             if (checkCollision()) {
-                alert("Game Over! Your score: " + score);
-                resetGame();
+                displayGameOver();
+                return;
             }
             if (eatFood()) {
                 score += 10;
@@ -221,17 +239,15 @@
             return head.x === food.x && head.y === food.y;
         }
 
+        // Display Game Over message
+        function displayGameOver() {
+            finalScore.textContent = score;
+            gameOverMessage.style.display = "block"; // Show "Game Over" message
+            resetGame();
+        }
+
         // Reset game
         function resetGame() {
             score = 0;
             snake.length = 1;
-            snake[0] = { x: 160, y: 160 };
-            direction = "right";
-            generateFood();
-            document.querySelector(".play-button").style.display = "inline-block"; // Show play button
-            document.querySelector(".game-board").style.display = "none"; // Hide game board
-        }
-    </script>
-</body>
-
-</html>
+            snake[0] = { x
