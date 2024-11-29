@@ -1,66 +1,123 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Rewards</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-      
-        body, html {
+        body {
+            font-family: "Roboto", Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #f8fafc;
             margin: 0;
             padding: 0;
-            height: 100%;
-            width: 100%;
-            overflow: hidden; 
         }
-        
-        
-        .loading-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: url('material/images/re.gif') no-repeat center center fixed; 
-            background-size: cover; 
-            color: white;
-            text-align: center;
-            font-family: Arial, sans-serif;
+
+        #reward-container {
+            margin: 30px auto;
+            max-width: 600px;
+            padding: 20px;
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
-        
-        .loading-container h1 {
+
+        h1 {
+            margin-bottom: 20px;
             font-size: 24px;
+            color: #e0f2fe;
+        }
+
+        p {
             margin: 0;
+            font-size: 18px;
+            color: #facc15;
         }
-        
-        .spinner {
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            border-left: 8px solid #003cff; 
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
+
+        .btn {
+            display: inline-block;
             margin-top: 20px;
+            background: linear-gradient(135deg, #34d399, #059669);
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+
+        .btn:hover {
+            background: linear-gradient(135deg, #86efac, #34d399);
+            transform: scale(1.05);
+        }
+
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
+            padding: 10px 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #fff;
+            text-align: center;
+            font-size: 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            margin-bottom: 5px;
+        }
+
+        .nav-item:hover {
+            color: #34d399;
         }
     </style>
 </head>
+
 <body>
-    <div class="loading-container">
-        <div>
-            <h1> adding...</h1>
-            <div class="spinner"></div>
-        </div>
+    <div id="reward-container">
+        <h1>Congratulations!</h1>
+        <p>You’ve successfully claimed your reward!</p>
+        <a href="task.html" class="btn">Go Back to Tasks</a>
     </div>
 
-    <script>
-       
-        setTimeout(function() {
-            window.location.href = 'home.html'; 
-        }, 5000);
-    </script>
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>Home</span>
+        </a>
+        <a href="game.html" class="nav-item">
+            <i class="fas fa-gamepad"></i>
+            <span>Game</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>Friends</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>Tasks</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>Balance</span>
+        </a>
+    </nav>
 </body>
+
 </html>
