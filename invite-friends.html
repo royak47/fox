@@ -26,64 +26,55 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .invited-friends {
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #1f2937;
-            border-radius: 12px;
-            width: 90%;
-            max-width: 600px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-
-        .friend {
+        .frens-invite-buttons {
             display: flex;
             align-items: center;
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #111827;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            justify-content: center;
         }
 
-        .friend img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+        .frens-invite-buttons input {
+            width: 70%;
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
             margin-right: 10px;
         }
 
-        .friend h4 {
-            color: #34d399;
-            margin: 0;
+        .frens-invite-buttons button {
+            background-color: #34d399;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
         }
 
-        nav.bottom-nav {
+        .frens-invite-buttons button:hover {
+            background-color: #059669;
+        }
+
+        .copy-success {
             display: flex;
-            justify-content: space-around;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #0284c7, #2563eb);
-            padding: 10px 0;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .nav-item {
-            text-decoration: none;
-            color: #f8fafc;
-            text-align: center;
-            font-size: 14px;
-        }
-
-        .nav-item i {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .nav-item:hover {
+            align-items: center;
+            justify-content: center;
             color: #34d399;
+            font-size: 16px;
+            margin-top: 10px;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .copy-success.visible {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .copy-success i {
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -92,81 +83,30 @@
     <div class="frens-invite">
         <h2><u>Invite Friends and Earn Rewards!</u></h2>
         <div class="frens-invite-buttons">
-            <input type="text" id="link" readonly>
-            <button class="copy-btn" id="copyButton">Copy Link</button>
-            <button class="telegram-btn" id="telegramButton">Share on Telegram</button>
+            <input type="text" id="link" value="https://t.me/FOXOG_BOT/FOX" readonly>
+            <button id="copyButton">Copy Link</button>
+        </div>
+        <div class="copy-success" id="copySuccess">
+            <i class="fas fa-check-circle"></i>
+            Link copied successfully!
         </div>
     </div>
-
-    <div class="invited-friends">
-        <h3>Your Invited Friends</h3>
-        <div id="friendsList">
-            <!-- Friends will be dynamically added here -->
-        </div>
-    </div>
-
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
 
     <script>
-        // Generate Unique Link
-        const userId = Math.floor(Math.random() * 100000);
-        const baseUrl = "https://t.me/FOXOG_BOT/";
-        const referralLink = `${baseUrl}FOX?ref=${userId}`;
-        const linkInput = document.getElementById("link");
-        linkInput.value = referralLink;
-
         // Copy to Clipboard
         document.getElementById("copyButton").addEventListener("click", () => {
+            const linkInput = document.getElementById("link");
             linkInput.select();
             linkInput.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(linkInput.value);
-            alert("Link copied to clipboard!");
-        });
+            navigator.clipboard.writeText(linkInput.value).then(() => {
+                const successMessage = document.getElementById("copySuccess");
+                successMessage.classList.add("visible");
 
-        // Share on Telegram
-        document.getElementById("telegramButton").addEventListener("click", () => {
-            const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Join%20me%20on%20this%20amazing%20platform!`;
-            window.open(telegramShareUrl, "_blank");
-        });
-
-        // Simulate fetching invited friends from a backend
-        const friends = [
-            { name: "Alice", avatar: "https://placekitten.com/50/50" },
-            { name: "Bob", avatar: "https://placekitten.com/51/51" },
-            { name: "Charlie", avatar: "https://placekitten.com/52/52" },
-        ];
-
-        const friendsList = document.getElementById("friendsList");
-
-        friends.forEach(friend => {
-            const friendDiv = document.createElement("div");
-            friendDiv.className = "friend";
-            friendDiv.innerHTML = `
-                <img src="${friend.avatar}" alt="${friend.name}'s avatar">
-                <h4>${friend.name}</h4>
-            `;
-            friendsList.appendChild(friendDiv);
+                // Hide success message after 3 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove("visible");
+                }, 3000);
+            });
         });
     </script>
 </body>
