@@ -4,9 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>Fox Game Portal</title>
     <style>
-        /* Reset CSS */
         * {
             margin: 0;
             padding: 0;
@@ -16,8 +15,8 @@
         body, html {
             height: 100%;
             width: 100%;
+            background: linear-gradient(45deg, #111, #444);
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #111, #444); /* Dark gradient background for a sleek look */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -25,61 +24,81 @@
             overflow: hidden;
         }
 
-        /* Main container with animation */
-        .loading-container {
+        /* Main container with central alignment */
+        .container {
             text-align: center;
-            animation: fadeIn 1s ease-in-out;
+            position: relative;
+            z-index: 10;
         }
 
+        /* Heading with glowing effect */
         h1 {
             font-size: 48px;
             margin-bottom: 30px;
-            font-weight: 700;
-            letter-spacing: 3px;
+            font-weight: bold;
+            letter-spacing: 2px;
             text-transform: uppercase;
             color: #ffcc00;
             text-shadow: 0 0 15px #ffcc00, 0 0 30px #ffcc00, 0 0 60px #ffcc00, 0 0 100px #ffcc00;
         }
 
-        /* Spinner */
-        .spinner {
-            border: 8px solid rgba(255, 255, 255, 0.1);
-            border-left: 8px solid #ffcc00; /* Neon yellow spinner */
-            border-radius: 50%;
-            width: 60px;
-            height: 60px;
-            animation: spin 1s linear infinite;
-            margin: 0 auto;
+        /* Glowing buttons */
+        .play-button {
+            padding: 20px 40px;
+            font-size: 24px;
+            background: linear-gradient(135deg, #ffcc00, #ff9800);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.3s ease, background 0.3s ease;
+            box-shadow: 0 0 20px rgba(255, 204, 0, 0.6);
         }
 
-        /* Fade-in animation */
-        @keyframes fadeIn {
+        .play-button:hover {
+            background: linear-gradient(135deg, #ff9800, #ffcc00);
+            transform: scale(1.1);
+        }
+
+        /* Neon border for play button */
+        .play-button:focus {
+            outline: none;
+        }
+
+        /* Animated background */
+        .background-animation {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('https://i.imgur.com/tmExANV.jpg') no-repeat center center;
+            background-size: cover;
+            filter: blur(10px);
+            z-index: -1;
+            animation: pulse 5s infinite;
+        }
+
+        /* Keyframes for background pulse effect */
+        @keyframes pulse {
             0% {
-                opacity: 0;
-                transform: translateY(-50px);
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.05);
             }
 
             100% {
-                opacity: 1;
-                transform: translateY(0);
+                transform: scale(1);
             }
         }
 
-        /* Spinner animation */
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-
-        /* Fox Face Animation */
+        /* Fox face animation (SVG) */
         .fox-face {
             position: absolute;
-            top: 20%;
+            top: 10%;
             left: 50%;
             transform: translateX(-50%);
             width: 120px;
@@ -87,86 +106,59 @@
             animation: foxBounce 1.5s infinite alternate ease-in-out;
         }
 
-        /* Fox bouncing animation */
+        /* Fox bouncing effect */
         @keyframes foxBounce {
             0% {
                 transform: translateX(-50%) translateY(0);
             }
 
             100% {
-                transform: translateX(-50%) translateY(-25px);
+                transform: translateX(-50%) translateY(-30px);
             }
         }
 
-        /* Fox SVG Face (using a simple fox illustration) */
+        /* Fox SVG */
         .fox-face svg {
             width: 100%;
             height: 100%;
             fill: #ff9800;
         }
-
-        /* Futuristic gaming theme with glow effect */
-        .futuristic-glow {
-            color: #00f7ff; /* Cyan glow color */
-            text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff, 0 0 60px #00f7ff, 0 0 100px #00f7ff;
-        }
-
-        /* Call to action button (Play Game button) */
-        .play-button {
-            margin-top: 20px;
-            padding: 15px 30px;
-            background: linear-gradient(135deg, #ffcc00, #ff9800);
-            color: white;
-            font-size: 18px;
-            font-weight: bold;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.3s ease, background 0.3s ease;
-        }
-
-        .play-button:hover {
-            background: linear-gradient(135deg, #ff9800, #ffcc00);
-            transform: scale(1.05);
-        }
     </style>
 </head>
 
 <body>
-    <div class="loading-container">
-        <!-- Fox Face SVG with animation -->
+    <!-- Main Content -->
+    <div class="container">
         <div class="fox-face">
-            <!-- Simple Fox Face SVG -->
+            <!-- Simple fox face SVG -->
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-                <!-- Fox face -->
                 <circle cx="50" cy="50" r="45" fill="#ff9800" />
-                <!-- Eyes -->
                 <circle cx="35" cy="40" r="8" fill="white" />
                 <circle cx="65" cy="40" r="8" fill="white" />
-                <!-- Nose -->
                 <circle cx="50" cy="60" r="5" fill="black" />
-                <!-- Ears -->
                 <path d="M25,20 Q30,5 40,15" fill="#ff9800" />
                 <path d="M75,20 Q70,5 60,15" fill="#ff9800" />
             </svg>
         </div>
-        <!-- Game Loading Text -->
-        <h1 class="futuristic-glow">Loading...</h1>
-        <!-- Loading Spinner -->
-        <div class="spinner"></div>
-        <!-- Play Game Button -->
-        <button class="play-button" onclick="startGame()">Play Game</button>
+        <h1>Welcome to Fox Games</h1>
+        <p style="font-size: 18px; margin-bottom: 40px; color: #ffffff;">
+            Prepare to jump into an epic adventure and earn Fox Coins!
+        </p>
+        <button class="play-button" onclick="startGame()">Play Now</button>
     </div>
 
+    <!-- Background Animation -->
+    <div class="background-animation"></div>
+
     <script>
-        // Redirect to the game page or home after clicking the Play Game button
+        // Redirect to game page or home after the user clicks the "Play Now" button
         function startGame() {
-            window.location.href = 'game.html'; // Replace with your game page link
+            window.location.href = 'game.html'; // Replace with your game page URL
         }
 
-        // Automatically redirect to home page after 5 seconds if no action taken
+        // Redirect to home after 5 seconds if the button is not clicked
         setTimeout(function () {
-            window.location.href = 'home.html'; // Replace with your home page link
+            window.location.href = 'home.html'; // Replace with your home page URL
         }, 5000);
     </script>
 </body>
