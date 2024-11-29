@@ -4,70 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game</title>
+    <title>Game Play - Fox Rewards</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="material/css/styles.css">
     <style>
         body {
-            font-family: "Roboto", Arial, sans-serif;
-            text-align: center;
+            font-family: 'Roboto', sans-serif;
             background: linear-gradient(135deg, #1e293b, #0f172a);
             color: #f8fafc;
+            text-align: center;
             margin: 0;
             padding: 0;
         }
 
-        #game-container {
-            margin: 30px auto;
-            max-width: 600px;
-            padding: 20px;
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            border-radius: 12px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-        }
-
         h1 {
-            margin-bottom: 20px;
-            font-size: 24px;
-            color: #e0f2fe;
+            color: #38bdf8;
+            font-size: 32px;
+            margin: 20px 0;
         }
 
-        p {
-            font-size: 16px;
-            color: #94a3b8;
-            margin-bottom: 20px;
+        .game-container {
+            margin: 20px auto;
+            max-width: 800px;
         }
 
-        img {
-            width: 80%;
+        .game {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            padding: 20px;
+            margin: 20px auto;
             border-radius: 12px;
-            margin-bottom: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            color: #fff;
+            text-align: center;
         }
 
-        .btn {
+        .game h3 {
+            margin: 10px 0;
+            color: #facc15;
+        }
+
+        .game button {
             background: linear-gradient(135deg, #34d399, #059669);
             color: #fff;
-            padding: 10px 20px;
             border: none;
-            border-radius: 8px;
+            padding: 12px 20px;
             font-size: 16px;
-            text-decoration: none;
+            cursor: pointer;
+            border-radius: 8px;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .btn:hover {
+        .game button:hover {
             background: linear-gradient(135deg, #86efac, #34d399);
             transform: scale(1.05);
         }
 
+        iframe {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 12px;
+            margin: 10px 0;
+        }
+
         .bottom-nav {
-            display: flex;
-            justify-content: space-around;
             position: fixed;
             bottom: 0;
             width: 100%;
             background: linear-gradient(135deg, #0284c7, #0369a1);
+            display: flex;
+            justify-content: space-around;
             padding: 10px 0;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .nav-item {
@@ -75,14 +82,11 @@
             color: #fff;
             text-align: center;
             font-size: 14px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         .nav-item i {
             font-size: 20px;
+            display: block;
             margin-bottom: 5px;
         }
 
@@ -93,36 +97,68 @@
 </head>
 
 <body>
-    <div id="game-container">
-        <h1>Fun Games</h1>
-        <img src="material/images/game-preview.png" alt="Game Preview">
-        <p>Play games and earn rewards!</p>
-        <a href="task.html" class="btn">Start Playing</a>
+    <h1>Game Play - Earn Fox Coins 🦊</h1>
+    <div class="game-container">
+        <!-- Game 1: Flappy Bird -->
+        <div class="game">
+            <h3>Flappy Bird</h3>
+            <iframe src="https://flappybird.io/" title="Flappy Bird"></iframe>
+            <button onclick="rewardUser(100, 'Flappy Bird')">Claim 100 🦊 for Playing</button>
+        </div>
+
+        <!-- Game 2: 2048 -->
+        <div class="game">
+            <h3>2048</h3>
+            <iframe src="https://play2048.co/" title="2048 Game"></iframe>
+            <button onclick="rewardUser(150, '2048')">Claim 150 🦊 for Reaching 2048</button>
+        </div>
+
+        <!-- Game 3: Dino Game -->
+        <div class="game">
+            <h3>Chrome Dino Game</h3>
+            <iframe src="https://chromedino.com/" title="Dino Game"></iframe>
+            <button onclick="rewardUser(50, 'Dino Game')">Claim 50 🦊 for Playing</button>
+        </div>
     </div>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
-            <span>Home</span>
+            <span>HOME</span>
         </a>
         <a href="game.html" class="nav-item">
             <i class="fas fa-gamepad"></i>
-            <span>Game</span>
+            <span>GAME PLAY</span>
         </a>
         <a href="invite-friends.html" class="nav-item">
             <i class="fas fa-user-friends"></i>
-            <span>Friends</span>
+            <span>FRIENDS</span>
         </a>
         <a href="task.html" class="nav-item">
             <i class="fas fa-tasks"></i>
-            <span>Tasks</span>
+            <span>TASKS</span>
         </a>
         <a href="balance.html" class="nav-item">
             <i class="fas fa-wallet"></i>
-            <span>Balance</span>
+            <span>BALANCE</span>
         </a>
     </nav>
+
+    <script>
+        function rewardUser(foxCoins, gameName) {
+            const currentBalance = localStorage.getItem("foxBalance") || 0;
+            const newBalance = parseInt(currentBalance) + foxCoins;
+            localStorage.setItem("foxBalance", newBalance);
+
+            alert(`🎉 Congrats! You've earned ${foxCoins} 🦊 by playing ${gameName}.\nYour new balance is ${newBalance} 🦊.`);
+        }
+
+        // Display user's Fox balance on load (optional)
+        window.onload = () => {
+            const balance = localStorage.getItem("foxBalance") || 0;
+            console.log(`User's current Fox balance: ${balance} 🦊`);
+        };
+    </script>
 </body>
 
 </html>
