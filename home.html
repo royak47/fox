@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-
+    <link rel="stylesheet" href="material/css/styles.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -17,20 +17,16 @@
             padding: 0;
         }
 
-        /* Centered Logo */
         #logo-container {
-            margin: 20px auto;
-            display: flex;
-            justify-content: center;
+            margin: 30px auto;
         }
 
         #logo-container img {
-            width: 80px;
+            width: 120px;
             border-radius: 50%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
         }
 
-        /* Balance Container */
         #balance-container {
             margin: 20px;
             font-size: 22px;
@@ -42,7 +38,6 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Task Cards */
         .task-container {
             margin: 20px auto;
             max-width: 600px;
@@ -142,12 +137,32 @@
         .nav-item:hover {
             color: #34d399;
         }
+
+        @media (max-width: 600px) {
+            .task-container {
+                max-width: 100%;
+            }
+
+            .task-button {
+                padding: 10px 15px;
+                font-size: 14px;
+            }
+
+            .task h4 {
+                font-size: 16px;
+            }
+
+            #balance-container {
+                font-size: 18px;
+                padding: 10px;
+            }
+        }
     </style>
 </head>
 
 <body>
     <div id="logo-container">
-        <img src="material/images/logo.png" alt="Fox Logo">
+        <img src="material/images/logo.png" alt="Logo">
     </div>
 
     <div id="balance-container">
@@ -169,13 +184,13 @@
                     </div>
                 </div>
             </div>
-            <button class="task-button" onclick="completeTask(300, 'reward.html')"> 🦊 Claim</button>
+            <button class="task-button" onclick="completeTask(300, 'reword.html')"> 🦊 Claim</button>
         </div>
 
         <div class="task">
             <div class="task-detail">
                 <div class="task-image">
-                    <img src="material/images/ver.gif" width="45px" alt="">
+                    <img src="material/images/ver.gif" width="45px" alt="Verification">
                 </div>
                 <div>
                     <h4>Verify and Earn</h4>
@@ -213,11 +228,11 @@
     </nav>
 
     <script>
-        function completeTask(amount, url) {
-            const balanceEl = document.getElementById('balance');
-            const currentBalance = parseInt(balanceEl.textContent, 10);
-            balanceEl.textContent = currentBalance + amount;
-            window.location.href = url;
+        function completeTask(amount, redirectUrl) {
+            const balanceElement = document.getElementById('balance');
+            const currentBalance = parseInt(balanceElement.textContent);
+            balanceElement.textContent = currentBalance + amount;
+            window.location.href = redirectUrl;
         }
     </script>
 </body>
