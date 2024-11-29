@@ -33,41 +33,7 @@
             margin-bottom: 20px;
         }
 
-        .refer-list {
-            background-color: #2d3748;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        }
-
-        .refer-list img {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            object-fit: cover;
-        }
-
-        .refer-list p {
-            margin-left: 15px;
-            color: #e2e8f0;
-        }
-
-        .button {
-            background-color: #4c9ce2;
-            color: white;
-            padding: 15px;
-            font-size: 16px;
-            width: 90%;
-            border-radius: 8px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: background-color 0.3s ease;
-        }
-
-        .button:hover {
-            background-color: #38b2ac;
-        }
-
+        /* Referral Link Box */
         .referral-box {
             background-color: #2d3748;
             padding: 20px;
@@ -148,6 +114,33 @@
             color: #38b2ac;
         }
 
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #2d3748;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item {
+            color: #e2e8f0;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+        }
+
+        .nav-item:hover {
+            color: #38b2ac;
+        }
+
     </style>
 </head>
 
@@ -157,23 +150,12 @@
         <div class="header">INVITE FRIENDS</div>
         <div class="subheader">Share your invitation link and get 10% of your friend's points</div>
 
-        <!-- Referral List -->
-        <div class="refer-list">
-            <div id="referListContainer">
-                <!-- Dynamically generated referral list items will go here -->
-                <div class="refer-item">
-                    <img src="https://via.placeholder.com/50" alt="User Avatar">
-                    <p>John Doe</p>
-                </div>
-            </div>
-        </div>
-
         <!-- Referral Link Box -->
         <div class="referral-box">
-            <input type="text" class="referral-link" id="referralLink" value="https://t.me/FOXOG_BOT/USER123" readonly>
+            <input type="text" class="referral-link" id="referralLink" value="https://t.me/FOXOG_BOT/FOX?startapp=6OfEZccg" readonly>
             <div class="referral-actions">
-                <button class="copy-btn" id="copyButton">Copy Link</button>
-                <button class="share-btn" id="shareButton">Share on Telegram</button>
+                <button class="copy-btn" id="copyButton">Copy Link 🔗</button>
+                <button class="share-btn" id="shareButton">Send via Telegram</button>
             </div>
         </div>
 
@@ -187,11 +169,35 @@
             <span class="close-btn" id="closeModal">X</span>
             <h2>Invite Friends</h2>
             <div class="referral-actions">
-                <button class="copy-btn" id="modalCopyButton">Copy Link</button>
-                <button class="share-btn" id="modalShareButton">Share on Telegram</button>
+                <button class="copy-btn" id="modalCopyButton">Copy Link 🔗</button>
+                <button class="share-btn" id="modalShareButton">Send via Telegram</button>
             </div>
         </div>
     </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
 
     <script>
         // Open modal when the "Invite Friends" button is clicked
@@ -219,7 +225,7 @@
 
         // Share referral link on Telegram
         const shareButton = document.getElementById("shareButton");
-        const userReferCode = "USER123"; // Dynamic user referral code
+        const userReferCode = "6OfEZccg"; // Dynamic user referral code
 
         shareButton.addEventListener("click", () => {
             const shareText = `Join me on this amazing platform! Use my referral code to get started: ${userReferCode}`;
