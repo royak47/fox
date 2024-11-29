@@ -110,12 +110,14 @@
         // Fetch unique referral link for the user
         async function fetchReferralLink() {
             try {
-                // Replace with your backend API endpoint
+                // Replace with your backend API endpoint that returns the user's unique referral code
                 const response = await fetch("https://your-backend-api.com/get-referral-link?userId=123");
                 const data = await response.json();
 
-                if (data && data.referralLink) {
-                    document.getElementById("referralLink").value = data.referralLink;
+                if (data && data.referralCode) {
+                    // Construct the referral link using the unique referral code
+                    const referralLink = `http://t.me/FOXOG_BOT?ref=${data.referralCode}`;
+                    document.getElementById("referralLink").value = referralLink;
                 }
             } catch (error) {
                 console.error("Error fetching referral link:", error);
@@ -144,3 +146,83 @@
 </body>
 
 </html>
+
+from flask import Flask, request, jsonify
+import uuid
+
+app = Flask(__name__)
+
+# Simulated database
+users = {
+    "123": {"name": "Alice", "referralCode": "ABC123"},
+    "456": {"name": "Bob", "referralCode": "DEF456"},
+}
+
+@app.route("/get-referral-link", methods=["GET"])
+def get_referral_link():
+    user_id = request.args.get("userId")
+    if user_id in users:
+        referral_code = users[user_id]["referralCode"]
+        referral_link = f"http://t.me/FOXOG_BOT?ref={referral_code}"
+        return jsonify({"referralCode": referral_code, "referralLink": referral_link})
+    else:
+        return jsonify({"error": "User not found"}), 404
+
+<!-- Bottom Navigation -->
+<nav class="bottom-nav">
+    <a href="home.html" class="nav-item">
+        <i class="fas fa-home"></i>
+        <span>HOME</span>
+    </a>
+    <a href="leaderboard.html" class="nav-item">
+        <i class="fas fa-trophy"></i>
+        <span>LEADERBOARD</span>
+    </a>
+    <a href="invite-friends.html" class="nav-item">
+        <i class="fas fa-user-friends"></i>
+        <span>FRIENDS</span>
+    </a>
+    <a href="task.html" class="nav-item">
+        <i class="fas fa-tasks"></i>
+        <span>TASKS</span>
+    </a>
+    <a href="balance.html" class="nav-item">
+        <i class="fas fa-wallet"></i>
+        <span>BALANCE</span>
+    </a>
+</nav>
+
+<!-- Bottom Navigation CSS -->
+<style>
+    .bottom-nav {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        background-color: #1f2937;
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-item {
+        color: #e2e8f0;
+        font-size: 16px;
+        text-align: center;
+        text-decoration: none;
+    }
+
+    .nav-item i {
+        display: block;
+        font-size: 20px;
+    }
+
+    .nav-item:hover {
+        color: #22c55e;
+    }
+</style>
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+
