@@ -2,7 +2,6 @@
 <html lang="en">
 
 <head>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invite Friends</title>
@@ -15,28 +14,35 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: #1a202c; /* Dark background matching your home and leaderboard */
+            background: #1a202c; /* Dark background matching your home page */
             color: #ffffff;
             text-align: center;
         }
 
+        /* Referral Box at the Bottom */
         .frens-invite {
             background-color: #2d3748; /* Dark card background */
-            padding: 30px;
+            padding: 20px;
             margin: 20px;
             border-radius: 10px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             max-width: 600px;
-            margin: 40px auto;
+            margin: 20px auto;
+            position: fixed;
+            bottom: 20px; /* Fix to the bottom */
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            z-index: 10;
         }
 
         .frens-invite h2 {
             color: #e2e8f0;
-            font-size: 24px;
+            font-size: 22px;
             margin-bottom: 15px;
+            text-transform: uppercase;
         }
 
-        /* Input & Button Styles */
         .frens-invite-button {
             display: flex;
             align-items: center;
@@ -54,6 +60,7 @@
             background-color: #4a5568; /* Slightly lighter background for the input */
             color: #e2e8f0;
             text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .frens-invite-button button {
@@ -65,6 +72,7 @@
             cursor: pointer;
             border-radius: 8px;
             transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
         .frens-invite-button button:hover {
@@ -118,7 +126,6 @@
             color: #38b2ac;
         }
     </style>
-
 </head>
 
 <body>
