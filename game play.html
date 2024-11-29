@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>game play - Fox Rewards</title>
+    <title>Game Play - Fox Rewards</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="material/css/styles.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
     <style>
         body {
             font-family: 'Roboto', sans-serif;
@@ -19,31 +19,41 @@
 
         h1 {
             color: #38bdf8;
-            font-size: 32px;
+            font-size: 36px;
             margin: 20px 0;
         }
 
-        .game play-container {
+        .game-container {
             margin: 20px auto;
-            max-width: 800px;
+            max-width: 900px;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            padding: 10px;
         }
 
-        .game play {
+        .game-card {
             background: linear-gradient(135deg, #3b82f6, #1e40af);
             padding: 20px;
-            margin: 20px auto;
             border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
             color: #fff;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
 
-        .game playh3 {
+        .game-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+        }
+
+        .game-card h3 {
             margin: 10px 0;
             color: #facc15;
+            font-size: 24px;
         }
 
-        .game play button {
+        .game-card button {
             background: linear-gradient(135deg, #34d399, #059669);
             color: #fff;
             border: none;
@@ -54,14 +64,14 @@
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .game play button:hover {
+        .game-card button:hover {
             background: linear-gradient(135deg, #86efac, #34d399);
             transform: scale(1.05);
         }
 
         iframe {
             width: 100%;
-            height: 400px;
+            height: 350px;
             border: none;
             border-radius: 12px;
             margin: 10px 0;
@@ -97,27 +107,27 @@
 </head>
 
 <body>
-    <h1>game play - Earn Fox Coins 🦊</h1>
-    <div class="GAME PLAY-container">
-        <!-- Game 1: Flappy Bird -->
-        <div class="game playY">
-            <h3>Flappy Bird</h3>
-            <iframe src="https://flappybird.io/" title="Flappy Bird"></iframe>
-            <button onclick="rewardUser(100, 'Flappy Bird')">Claim 100 🦊 for Playing</button>
+    <h1>Game Play - Earn Fox Coins 🦊</h1>
+    <div class="game-container">
+        <!-- Game 1: Tetris -->
+        <div class="game-card">
+            <h3>Tetris</h3>
+            <iframe src="https://tetris.com/play-tetris" title="Tetris Game"></iframe>
+            <button onclick="rewardUser(100, 'Tetris')">Claim 100 🦊 for Playing</button>
         </div>
 
-        <!-- game play 2: 2048 -->
-        <div class="game play">
-            <h3>2048</h3>
-            <iframe src="https://play2048.co/" title="2048 Game"></iframe>
-            <button onclick="rewardUser(150, '2048')">Claim 150 🦊 for Reaching 2048</button>
+        <!-- Game 2: Snake -->
+        <div class="game-card">
+            <h3>Snake Game</h3>
+            <iframe src="https://playsnake.org/" title="Snake Game"></iframe>
+            <button onclick="rewardUser(80, 'Snake Game')">Claim 80 🦊 for Playing</button>
         </div>
 
-        <!-- game play 3: Dino Game -->
-        <div class="game play">
-            <h3>Chrome Dino Game</h3>
-            <iframe src="https://chromedino.com/" title="Dino Game"></iframe>
-            <button onclick="rewardUser(50, 'Dino Game')">Claim 50 🦊 for Playing</button>
+        <!-- Game 3: Pac-Man -->
+        <div class="game-card">
+            <h3>Pac-Man</h3>
+            <iframe src="https://pacman.io/" title="Pac-Man Game"></iframe>
+            <button onclick="rewardUser(150, 'Pac-Man')">Claim 150 🦊 for Playing</button>
         </div>
     </div>
 
@@ -126,9 +136,9 @@
             <i class="fas fa-home"></i>
             <span>HOME</span>
         </a>
-        <a href="game play.html" class="nav-item">
+        <a href="gameplay.html" class="nav-item">
             <i class="fas fa-gamepad"></i>
-            <span>game play</span>
+            <span>GAME PLAY</span>
         </a>
         <a href="invite-friends.html" class="nav-item">
             <i class="fas fa-user-friends"></i>
