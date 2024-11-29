@@ -15,13 +15,13 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(120deg, #0f172a, #1e293b);
+            background: #1a202c; /* Dark background matching your home and leaderboard */
             color: #ffffff;
             text-align: center;
         }
 
         .frens-invite {
-            background-color: #2d3748;
+            background-color: #2d3748; /* Dark card background */
             padding: 30px;
             margin: 20px;
             border-radius: 10px;
@@ -31,33 +31,34 @@
         }
 
         .frens-invite h2 {
-            color: #ffffff;
+            color: #e2e8f0;
             font-size: 24px;
             margin-bottom: 15px;
         }
 
+        /* Input & Button Styles */
         .frens-invite-button {
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-direction: column;
         }
 
-        /* Input & Button Styles */
         .frens-invite-button input {
-            width: 70%;
+            width: 80%;
             padding: 12px;
             font-size: 16px;
             border: none;
             border-radius: 8px;
-            margin-right: 10px;
-            background-color: #1f2937;
+            margin-bottom: 15px;
+            background-color: #4a5568; /* Slightly lighter background for the input */
             color: #e2e8f0;
             text-align: center;
         }
 
         .frens-invite-button button {
             padding: 12px 20px;
-            background-color: #38b2ac;
+            background-color: #38b2ac; /* Teal color for the button */
             color: #fff;
             border: none;
             font-size: 16px;
@@ -126,9 +127,11 @@
     <div class="frens-invite">
         <h2><u>Invite Friends with Your Unique Link!</u></h2>
         <div class="frens-invite-button">
-            <input type="text" id="referralLink" value="https://t.me/FOXOG_BOT/REF123" readonly>
+            <!-- Display Unique Referral Link -->
+            <input type="text" id="referralLink" value="https://t.me/FOXOG_BOT/USER123" readonly>
             <button id="copyButton">Copy Link</button>
         </div>
+        <!-- Copy Success Message -->
         <div class="copy-success" id="copySuccess">
             <i class="fas fa-check-circle"></i> Link copied successfully!
         </div>
