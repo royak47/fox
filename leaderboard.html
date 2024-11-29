@@ -1,61 +1,57 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Complete Tasks</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
-
     <style>
-        /* Body Styling */
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Roboto', sans-serif;
             text-align: center;
-            background: linear-gradient(120deg, #1f2937, #111827);
-            color: #e5e7eb;
+            background-color: #121212;
+            color: #fff;
             margin: 0;
             padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            height: 100vh;
         }
 
-        /* Balance Container */
+        h2 {
+            margin: 20px;
+        }
+
         #balance-container {
-            margin: 20px auto;
+            margin: 20px;
             font-size: 22px;
-            font-weight: bold;
-            color: #facc15;
-            background: linear-gradient(90deg, #2dd4bf, #0284c7);
-            padding: 15px;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            display: inline-block;
         }
 
-        /* Task Container */
         .task-container {
-            margin: 20px auto;
+            margin: 10px auto;
             max-width: 600px;
+            padding: 20px;
         }
 
-        /* Task Styling */
         .task {
-            margin: 15px auto;
+            margin: 10px auto;
             padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            border: 1px solid #2a2a2a;
             border-radius: 12px;
-            background: linear-gradient(120deg, #3b82f6, #1e40af);
-            color: #ffffff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #333;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            width: 80%;
+            width: 90%;
         }
 
         .task:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.5);
         }
 
         .task-detail {
@@ -64,16 +60,14 @@
         }
 
         .task-image img {
-            border-radius: 50%;
-            margin-right: 15px;
-            border: 2px solid #facc15;
+            border-radius: 8px;
+            margin-right: 10px;
         }
 
         .task h4 {
             margin: 0;
-            font-size: 18px;
-            font-weight: bold;
-            color: #f8fafc;
+            font-size: 20px;
+            color: #f2f2f2;
         }
 
         .task-data {
@@ -88,78 +82,37 @@
 
         .task-data h5 {
             margin: 0;
-            color: #facc15;
+            color: #ffcc00;
             font-size: 18px;
-            font-weight: bold;
         }
 
-        /* Bottom Navigation */
-        .bottom-nav {
-            display: flex;
-            justify-content: space-around;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background: linear-gradient(90deg, #0284c7, #2563eb);
-            padding: 10px 0;
-            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+        .task-button {
+            background-color: #ffcc00;
+            color: black;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .nav-item {
-            text-decoration: none;
-            color: #f8fafc;
-            text-align: center;
-            font-size: 14px;
+        .task-button:hover {
+            background-color: #f9a825;
+            transform: scale(1.1);
         }
 
-        .nav-item i {
-            font-size: 20px;
-            display: block;
-            margin-bottom: 5px;
-        }
-
-        .nav-item:hover {
-            color: #34d399;
-        }
-
-        /* Heading Styling */
-        h2 {
-            color: #facc15;
-            text-transform: uppercase;
-            font-size: 24px;
-            margin-top: 10px;
-        }
-
-        h2 u {
-            text-decoration: none;
-            border-bottom: 3px solid #facc15;
-        }
-
-        /* New Features */
-        .progress-bar-container {
+        .tasks.scrollable {
+            max-height: 580px;
+            overflow-y: auto;
             margin: 20px auto;
-            width: 80%;
-            text-align: left;
-            background: #1f2937;
+            width: 90%;
+            padding-right: 10px;
+            border: 1px solid #2a2a2a;
             border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            background-color: #333;
         }
 
-        .progress-bar {
-            background: linear-gradient(90deg, #34d399, #16a34a);
-            height: 20px;
-            width: 70%;
-            border-radius: 12px 0 0 12px;
-        }
-
-        .progress-text {
-            margin-top: 5px;
-            font-size: 14px;
-            color: #9ca3af;
-        }
-
-        /* Media Queries */
         @media (max-width: 600px) {
             .task-container {
                 max-width: 100%;
@@ -173,79 +126,86 @@
             .task h4 {
                 font-size: 16px;
             }
+        }
 
-            #balance-container {
-                font-size: 18px;
-                padding: 10px;
-            }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #222;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item {
+            color: white;
+            text-align: center;
+            font-size: 14px;
+            text-decoration: none;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+        }
+
+        .nav-item:hover {
+            color: #ffcc00;
         }
     </style>
 </head>
-
 <body>
-    <!-- Balance Section -->
+
     <div id="balance-container">
-        <span id="balance">0</span> 🦊 Total Fox
+        <h2><b>_____________</b></h2>
+        <h2><b> TASKS </b></h2>
+        <span id="balance">0</span> 🦊Total Fox
     </div>
 
-    <!-- Mission Section -->
-    <h2><u><b>🏆 Our Mission 🏆</b></u></h2>
+    <h2><b>_______________</b></h2>
 
-    <!-- Progress Bar -->
-    <div class="progress-bar-container">
-        <div class="progress-bar"></div>
-    </div>
-    <div class="progress-text">Progress: 70%</div>
-
-    <!-- Task Section -->
-    <div class="task-container">
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/logo.png" width="45px" alt="">
-                </div>
-                <div>
-                    <h4>1st</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>100,000,000+</h5>
+    <section class="tasks scrollable">
+        <div class="task-container">
+            <div class="task">
+                <div class="task-detail">
+                    <div class="task-image">
+                        <img src="material/images/you.gif" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Subscribe</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>100</h5>
+                        </div>
                     </div>
                 </div>
+                <button class="task-button" onclick="completeTask(100, 'https://youtu.be/JqVhry6_O8A?si=cmsyr9Ty1R5VPk9U')"> 🦊claim</button>
+            </div>
+        </div>
+        <div class="task-container">
+            <div class="task">
+                <div class="task-detail">
+                    <div class="task-image">
+                        <img src="material/images/fa.png" width="45px" alt="">
+                    </div>
+                    <div>
+                        <h4>Follow</h4>
+                        <div class="task-data">
+                            <img src="material/images/logo.png" width="20px" alt="Coin Icon">
+                            <h5>100</h5>
+                        </div>
+                    </div>
+                </div>
+                <button class="task-button" onclick="completeTask(100, 'https://youtu.be/yDLwl-48N3A?si=8loBzpjvnnI4K8HW')"> 🦊claim</button>
             </div>
         </div>
 
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/logo.png" width="45px" alt="">
-                </div>
-                <div>
-                    <h4>2nd</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>200,000,000+</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <!-- Repeat the task structure as needed for other tasks -->
 
-        <div class="task">
-            <div class="task-detail">
-                <div class="task-image">
-                    <img src="material/images/logo.png" width="45px" alt="">
-                </div>
-                <div>
-                    <h4>3rd</h4>
-                    <div class="task-data">
-                        <img src="material/images/logo.png" width="20px" alt="Coin Icon">
-                        <h5>300,000,000+</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
 
-    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
@@ -272,5 +232,4 @@
     <script src="material/js/js.js"></script>
     <script src="material/js/main.js"></script>
 </body>
-
 </html>
