@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Invite Friends</title>
+    <title>Invite Friends & Earn Rewards!</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
     <link rel="stylesheet" href="material/css/st.css">
@@ -46,12 +46,12 @@
         .frens-invite-button {
             display: flex;
             align-items: center;
-            justify-content: center;
-            flex-direction: column;
+            justify-content: space-between;
+            flex-direction: row; /* Arrange buttons horizontally */
         }
 
         .frens-invite-button input {
-            width: 80%;
+            width: 60%;
             padding: 12px;
             font-size: 16px;
             border: none;
@@ -63,9 +63,9 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .frens-invite-button button {
+        .frens-invite-button button.copy {
             padding: 12px 20px;
-            background-color: #38b2ac; /* Teal color for the button */
+            background-color: #38b2ac; /* Teal color for the copy button */
             color: #fff;
             border: none;
             font-size: 16px;
@@ -75,126 +75,23 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        .frens-invite-button button:hover {
+        .frens-invite-button button.copy:hover {
             background-color: #319795;
         }
 
-        /* Copy Success Message */
-        .copy-success {
-            margin-top: 20px;
-            color: #38b2ac;
+        .frens-invite-button button.telegram {
+            padding: 12px 20px;
+            background-color: #0088cc; /* Telegram blue color */
+            color: #fff;
+            border: none;
             font-size: 16px;
-            visibility: hidden;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-left: 10px; /* Spacing between buttons */
         }
 
-        .copy-success.visible {
-            visibility: visible;
-            opacity: 1;
+        .frens-invite-button button.telegram:hover {
+            background-color: #0077b3;
         }
-
-        .copy-success i {
-            margin-right: 8px;
-        }
-
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #2d3748;
-            display: flex;
-            justify-content: space-around;
-            padding: 12px 0;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.2);
-        }
-
-        .nav-item {
-            color: #e2e8f0;
-            font-size: 16px;
-            text-align: center;
-            text-decoration: none;
-        }
-
-        .nav-item i {
-            display: block;
-            font-size: 20px;
-        }
-
-        .nav-item:hover {
-            color: #38b2ac;
-        }
-    </style>
-</head>
-
-<body>
-
-    <!-- Invitation Section -->
-    <div class="frens-invite">
-        <h2><u>Invite Friends with Your Unique Link!</u></h2>
-        <div class="frens-invite-button">
-            <!-- Display Unique Referral Link -->
-            <input type="text" id="referralLink" value="https://t.me/FOXOG_BOT/USER123" readonly>
-            <button id="copyButton">Copy Link</button>
-        </div>
-        <!-- Copy Success Message -->
-        <div class="copy-success" id="copySuccess">
-            <i class="fas fa-check-circle"></i> Link copied successfully!
-        </div>
-    </div>
-
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
-
-    <script>
-        // Function to simulate a unique referral link for a user
-        function getUniqueReferralLink() {
-            const userId = "USER123"; // Simulated unique user ID, replace it with actual dynamic user data
-            return `https://t.me/FOXOG_BOT/${userId}`;
-        }
-
-        // Set the referral link in the input field on page load
-        document.getElementById("referralLink").value = getUniqueReferralLink();
-
-        // Copy Link functionality
-        document.getElementById("copyButton").addEventListener("click", () => {
-            const referralLink = document.getElementById("referralLink");
-            referralLink.select();
-            referralLink.setSelectionRange(0, 99999);
-            navigator.clipboard.writeText(referralLink.value).then(() => {
-                const successMessage = document.getElementById("copySuccess");
-                successMessage.classList.add("visible");
-
-                // Hide success message after 3 seconds
-                setTimeout(() => {
-                    successMessage.classList.remove("visible");
-                }, 3000);
-            });
-        });
-    </script>
-
-</body>
-
-</html>
