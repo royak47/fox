@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Loading...</title>
     <style>
+        /* Reset CSS */
         * {
             margin: 0;
             padding: 0;
@@ -15,33 +16,35 @@
         body, html {
             height: 100%;
             width: 100%;
-            overflow: hidden;
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(45deg, #1e1e2f, #303050); /* Cool futuristic gradient */
+            background: linear-gradient(45deg, #111, #444); /* Dark gradient background for a sleek look */
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
+            overflow: hidden;
         }
 
+        /* Main container with animation */
         .loading-container {
             text-align: center;
-            animation: fadeIn 1.5s ease-in-out;
+            animation: fadeIn 1s ease-in-out;
         }
 
         h1 {
-            font-size: 32px;
-            margin-bottom: 20px;
+            font-size: 48px;
+            margin-bottom: 30px;
             font-weight: 700;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            color: #f0f0f0;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.4);
+            color: #ffcc00;
+            text-shadow: 0 0 15px #ffcc00, 0 0 30px #ffcc00, 0 0 60px #ffcc00, 0 0 100px #ffcc00;
         }
 
+        /* Spinner */
         .spinner {
             border: 8px solid rgba(255, 255, 255, 0.1);
-            border-left: 8px solid #0f0; /* Neon green spinner */
+            border-left: 8px solid #ffcc00; /* Neon yellow spinner */
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -55,6 +58,7 @@
                 opacity: 0;
                 transform: translateY(-50px);
             }
+
             100% {
                 opacity: 1;
                 transform: translateY(0);
@@ -66,78 +70,101 @@
             0% {
                 transform: rotate(0deg);
             }
+
             100% {
                 transform: rotate(360deg);
             }
         }
 
-        /* Futuristic glow effect */
-        .futuristic-glow {
-            color: #00f7ff; /* Cyan color for text */
-            text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff, 0 0 60px #00f7ff, 0 0 100px #00f7ff;
-        }
-
-        /* Fox animation */
-        .fox-container {
+        /* Fox Face Animation */
+        .fox-face {
             position: absolute;
-            bottom: 10%;
+            top: 20%;
             left: 50%;
             transform: translateX(-50%);
-            animation: foxMove 5s infinite alternate ease-in-out;
+            width: 120px;
+            height: 120px;
+            animation: foxBounce 1.5s infinite alternate ease-in-out;
         }
 
-        @keyframes foxMove {
+        /* Fox bouncing animation */
+        @keyframes foxBounce {
             0% {
                 transform: translateX(-50%) translateY(0);
             }
+
             100% {
-                transform: translateX(-50%) translateY(-20px);
+                transform: translateX(-50%) translateY(-25px);
             }
         }
 
-        /* Fox SVG Icon */
-        .fox-icon {
-            width: 80px;
-            height: 80px;
+        /* Fox SVG Face (using a simple fox illustration) */
+        .fox-face svg {
+            width: 100%;
+            height: 100%;
             fill: #ff9800;
-            animation: jump 1.5s infinite ease-in-out;
         }
 
-        @keyframes jump {
-            0% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-            100% {
-                transform: translateY(0);
-            }
+        /* Futuristic gaming theme with glow effect */
+        .futuristic-glow {
+            color: #00f7ff; /* Cyan glow color */
+            text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff, 0 0 60px #00f7ff, 0 0 100px #00f7ff;
+        }
+
+        /* Call to action button (Play Game button) */
+        .play-button {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #ffcc00, #ff9800);
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: transform 0.3s ease, background 0.3s ease;
+        }
+
+        .play-button:hover {
+            background: linear-gradient(135deg, #ff9800, #ffcc00);
+            transform: scale(1.05);
         }
     </style>
 </head>
 
 <body>
     <div class="loading-container">
-        <div>
-            <h1 class="futuristic-glow">Loading...</h1>
-            <div class="spinner"></div>
+        <!-- Fox Face SVG with animation -->
+        <div class="fox-face">
+            <!-- Simple Fox Face SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+                <!-- Fox face -->
+                <circle cx="50" cy="50" r="45" fill="#ff9800" />
+                <!-- Eyes -->
+                <circle cx="35" cy="40" r="8" fill="white" />
+                <circle cx="65" cy="40" r="8" fill="white" />
+                <!-- Nose -->
+                <circle cx="50" cy="60" r="5" fill="black" />
+                <!-- Ears -->
+                <path d="M25,20 Q30,5 40,15" fill="#ff9800" />
+                <path d="M75,20 Q70,5 60,15" fill="#ff9800" />
+            </svg>
         </div>
-    </div>
-
-    <!-- Animated Fox -->
-    <div class="fox-container">
-        <!-- Simple Fox SVG -->
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="fox-icon">
-            <circle cx="50" cy="50" r="40" fill="#ff9800" />
-            <circle cx="35" cy="40" r="5" fill="#fff" />
-            <circle cx="65" cy="40" r="5" fill="#fff" />
-            <path d="M35 60 Q50 75, 65 60" stroke="#fff" stroke-width="2" fill="transparent" />
-        </svg>
+        <!-- Game Loading Text -->
+        <h1 class="futuristic-glow">Loading...</h1>
+        <!-- Loading Spinner -->
+        <div class="spinner"></div>
+        <!-- Play Game Button -->
+        <button class="play-button" onclick="startGame()">Play Game</button>
     </div>
 
     <script>
-        // Redirect to home.html after 5 seconds
+        // Redirect to the game page or home after clicking the Play Game button
+        function startGame() {
+            window.location.href = 'game.html'; // Replace with your game page link
+        }
+
+        // Automatically redirect to home page after 5 seconds if no action taken
         setTimeout(function () {
             window.location.href = 'home.html';
         }, 5000);
