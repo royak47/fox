@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -26,61 +26,36 @@
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .frens-invite h2 {
-            color: #facc15;
-            font-size: 24px;
-            margin-bottom: 20px;
+        .invited-friends {
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #1f2937;
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
 
-        .frens-invite-buttons {
+        .friend {
             display: flex;
             align-items: center;
-            justify-content: space-around;
-            margin-top: 20px;
-        }
-
-        .frens-invite-buttons input {
+            margin: 10px 0;
             padding: 10px;
-            font-size: 16px;
-            border: 2px solid #94a3b8;
+            background-color: #111827;
             border-radius: 8px;
-            width: 70%;
-            background: #1e293b;
-            color: #f8fafc;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
         }
 
-        .frens-invite-buttons button {
-            padding: 10px 20px;
-            font-size: 16px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+        .friend img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 10px;
         }
 
-        .copy-btn {
-            background-color: #34d399;
-            color: #111827;
-        }
-
-        .copy-btn:hover {
-            background-color: #16a34a;
-        }
-
-        .telegram-btn {
-            background-color: #2b6cb0;
-            color: #fff;
-        }
-
-        .telegram-btn:hover {
-            background-color: #1e429f;
-        }
-
-        .notification {
-            margin-top: 10px;
-            color: #facc15;
-            font-size: 14px;
-            display: none;
+        .friend h4 {
+            color: #34d399;
+            margin: 0;
         }
 
         nav.bottom-nav {
@@ -121,7 +96,13 @@
             <button class="copy-btn" id="copyButton">Copy Link</button>
             <button class="telegram-btn" id="telegramButton">Share on Telegram</button>
         </div>
-        <div class="notification" id="notification">Link copied to clipboard!</div>
+    </div>
+
+    <div class="invited-friends">
+        <h3>Your Invited Friends</h3>
+        <div id="friendsList">
+            <!-- Friends will be dynamically added here -->
+        </div>
     </div>
 
     <nav class="bottom-nav">
@@ -160,19 +141,32 @@
             linkInput.select();
             linkInput.setSelectionRange(0, 99999);
             navigator.clipboard.writeText(linkInput.value);
-
-            // Show notification
-            const notification = document.getElementById("notification");
-            notification.style.display = "block";
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 2000);
+            alert("Link copied to clipboard!");
         });
 
         // Share on Telegram
         document.getElementById("telegramButton").addEventListener("click", () => {
             const telegramShareUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink)}&text=Join%20me%20on%20this%20amazing%20platform!`;
             window.open(telegramShareUrl, "_blank");
+        });
+
+        // Simulate fetching invited friends from a backend
+        const friends = [
+            { name: "Alice", avatar: "https://placekitten.com/50/50" },
+            { name: "Bob", avatar: "https://placekitten.com/51/51" },
+            { name: "Charlie", avatar: "https://placekitten.com/52/52" },
+        ];
+
+        const friendsList = document.getElementById("friendsList");
+
+        friends.forEach(friend => {
+            const friendDiv = document.createElement("div");
+            friendDiv.className = "friend";
+            friendDiv.innerHTML = `
+                <img src="${friend.avatar}" alt="${friend.name}'s avatar">
+                <h4>${friend.name}</h4>
+            `;
+            friendsList.appendChild(friendDiv);
         });
     </script>
 </body>
