@@ -9,11 +9,11 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
-            text-align: center;
-            background: linear-gradient(120deg, #1f2937, #111827);
-            color: #e5e7eb;
             margin: 0;
             padding: 0;
+            background: linear-gradient(120deg, #1f2937, #111827);
+            color: #e5e7eb;
+            text-align: center;
         }
 
         .frens-container {
@@ -107,6 +107,38 @@
             font-size: 22px;
             color: #34d399;
         }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: #111827;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.2);
+        }
+
+        .bottom-nav a {
+            text-decoration: none;
+            color: #9ca3af;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .bottom-nav a i {
+            font-size: 20px;
+        }
+
+        .bottom-nav a span {
+            display: block;
+            margin-top: 5px;
+        }
+
+        .bottom-nav a:hover {
+            color: #34d399;
+        }
     </style>
 </head>
 
@@ -131,6 +163,30 @@
         </div>
     </div>
 
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <i class="fas fa-home"></i>
+            <span>HOME</span>
+        </a>
+        <a href="leaderboard.html" class="nav-item">
+            <i class="fas fa-trophy"></i>
+            <span>LEADERBOARD</span>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <i class="fas fa-user-friends"></i>
+            <span>FRIENDS</span>
+        </a>
+        <a href="task.html" class="nav-item">
+            <i class="fas fa-tasks"></i>
+            <span>TASKS</span>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <i class="fas fa-wallet"></i>
+            <span>BALANCE</span>
+        </a>
+    </nav>
+
     <script>
         // Copy to Clipboard
         document.getElementById("copyButton").addEventListener("click", () => {
@@ -148,17 +204,18 @@
             });
         });
 
-        // Simulating friend invitation
+        // Friend Invitation Logic
         let friendCount = 0;
         const friendCountElement = document.getElementById("friendCount");
 
-        function simulateInvite() {
+        // Simulate a friend joining (replace this logic with actual backend integration)
+        function friendJoined() {
             friendCount += 1;
             friendCountElement.textContent = friendCount;
         }
 
-        // For demonstration, auto-increment friend count every 5 seconds
-        setInterval(simulateInvite, 5000);
+        // Simulate a friend joining every 5 seconds for demo purposes
+        setInterval(friendJoined, 5000);
     </script>
 </body>
 
