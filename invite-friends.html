@@ -163,13 +163,15 @@
         async function fetchReferralLink() {
             try {
                 // Replace with your backend API endpoint that returns the user's unique referral code
-                const response = await fetch("https://your-backend-api.com/get-referral-link?userId=123");
+                const userId = "123"; // Example user ID (replace with dynamic user ID)
+                const response = await fetch(`https://your-backend-api.com/get-referral-link?userId=${userId}`);
                 const data = await response.json();
 
-                if (data && data.referralCode) {
-                    // Construct the referral link using the unique referral code
-                    const referralLink = `http://t.me/FOXOG_BOT?ref=${data.referralCode}`;
-                    document.getElementById("referralLink").value = referralLink;
+                if (data && data.referralLink) {
+                    // Set the referral link in the input field
+                    document.getElementById("referralLink").value = data.referralLink;
+                } else {
+                    console.error("Referral link not found in response.");
                 }
             } catch (error) {
                 console.error("Error fetching referral link:", error);
