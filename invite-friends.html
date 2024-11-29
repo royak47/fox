@@ -12,30 +12,38 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: #1a202c;
+            background: #121212;
             color: #ffffff;
-            text-align: center;
         }
 
-        /* Main Section */
-        .content {
-            padding: 20px;
-        }
-
+        /* Header Section */
         .header {
-            font-size: 30px;
+            text-align: center;
+            padding: 20px;
+            background-color: #1e293b;
+            border-bottom: 1px solid #334155;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 28px;
             font-weight: bold;
         }
 
-        .subheader {
-            font-size: 18px;
-            color: #a0aec0;
-            margin-bottom: 20px;
+        .header p {
+            margin: 5px 0 0;
+            color: #94a3b8;
+            font-size: 16px;
         }
 
-        /* Referral Link Box */
+        /* Referral Section */
+        .referral-section {
+            text-align: center;
+            padding: 20px;
+        }
+
         .referral-box {
-            background-color: #2d3748;
+            background-color: #1e293b;
             padding: 20px;
             border-radius: 10px;
             margin-top: 20px;
@@ -43,20 +51,20 @@
         }
 
         .referral-link {
-            background-color: #4a5568;
+            background-color: #334155;
             color: #e2e8f0;
             padding: 10px;
-            width: 100%;
-            border: none;
             border-radius: 8px;
             margin-bottom: 15px;
+            border: none;
             text-align: center;
+            width: 100%;
         }
 
         .referral-actions {
             display: flex;
             justify-content: space-between;
-            gap: 20px;
+            gap: 10px;
         }
 
         .copy-btn,
@@ -65,7 +73,8 @@
             color: white;
             padding: 12px;
             border-radius: 8px;
-            width: 48%;
+            flex: 1;
+            text-align: center;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
@@ -75,181 +84,104 @@
             background-color: #319795;
         }
 
-        /* Modal for Invite */
-        .modal {
+        .toast {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.5);
-            display: none;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: #1a202c;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            width: 400px;
-            text-align: center;
-        }
-
-        .close-btn {
+            top: 20px;
+            right: 20px;
+            background-color: #38b2ac;
             color: white;
-            font-size: 20px;
-            cursor: pointer;
-            position: absolute;
-            top: 10px;
-            right: 10px;
-        }
-
-        .close-btn:hover {
-            color: #38b2ac;
-        }
-
-        /* Bottom Navigation */
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            background-color: #2d3748;
+            padding: 10px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
             display: flex;
-            justify-content: space-around;
-            padding: 10px 0;
-            box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .nav-item {
-            color: #e2e8f0;
-            text-align: center;
-            font-size: 14px;
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
         }
 
-        .nav-item i {
-            font-size: 20px;
-            display: block;
+        .toast i {
+            color: white;
         }
-
-        .nav-item:hover {
-            color: #38b2ac;
-        }
-
     </style>
 </head>
 
 <body>
+    <div class="header">
+        <h1>Invite Friends</h1>
+        <p>Earn rewards by sharing your referral link</p>
+    </div>
 
-    <div class="content">
-        <div class="header">INVITE FRIENDS</div>
-        <div class="subheader">Share your invitation link and get 10% of your friend's points</div>
-
-        <!-- Referral Link Box -->
+    <!-- Referral Section -->
+    <div class="referral-section">
         <div class="referral-box">
-            <input type="text" class="referral-link" id="referralLink" value="https://t.me/FOXOG_BOT/FOX?startapp=6OfEZccg" readonly>
+            <input type="text" class="referral-link" id="referralLink" readonly>
             <div class="referral-actions">
                 <button class="copy-btn" id="copyButton">Copy Link 🔗</button>
-                <button class="share-btn" id="shareButton">Send via Telegram</button>
-            </div>
-        </div>
-
-        <!-- Invite Button -->
-        <button class="button" id="inviteButton">Invite Friends</button>
-    </div>
-
-    <!-- Modal for Invite Actions -->
-    <div class="modal" id="inviteModal">
-        <div class="modal-content">
-            <span class="close-btn" id="closeModal">X</span>
-            <h2>Invite Friends</h2>
-            <div class="referral-actions">
-                <button class="copy-btn" id="modalCopyButton">Copy Link 🔗</button>
-                <button class="share-btn" id="modalShareButton">Send via Telegram</button>
+                <button class="share-btn" id="shareButton">Share on Telegram</button>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Navigation -->
-    <nav class="bottom-nav">
-        <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
-        </a>
-        <a href="leaderboard.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>LEADERBOARD</span>
-        </a>
-        <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
-        </a>
-        <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
-        </a>
-        <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
-        </a>
-    </nav>
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">
+        <i class="fas fa-check-circle"></i>
+        <span>Link copied successfully!</span>
+    </div>
 
     <script>
-        // Open modal when the "Invite Friends" button is clicked
-        const inviteButton = document.getElementById("inviteButton");
-        const inviteModal = document.getElementById("inviteModal");
-        const closeModal = document.getElementById("closeModal");
-
-        inviteButton.addEventListener("click", () => {
-            inviteModal.classList.add("active");
-        });
-
-        closeModal.addEventListener("click", () => {
-            inviteModal.classList.remove("active");
-        });
-
-        // Copy referral link functionality
+        // Elements
         const copyButton = document.getElementById("copyButton");
         const referralLink = document.getElementById("referralLink");
+        const toast = document.getElementById("toast");
+        const shareButton = document.getElementById("shareButton");
 
+        // Fetch Unique Referral Link
+        async function fetchReferralLink() {
+            try {
+                // Replace with your backend API endpoint
+                const response = await fetch("https://mockapi.io/clone/67496dde868020296630f629");
+                const data = await response.json();
+
+                // Set the unique referral link
+                const uniqueLink = `https://t.me/FOXOG_BOT/FOX?startapp=${data.referralCode}`;
+                referralLink.value = uniqueLink;
+            } catch (error) {
+                console.error("Failed to fetch referral link", error);
+            }
+        }
+
+        // Show Toast Notification
+        function showToast(message) {
+            toast.querySelector("span").innerText = message;
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2000);
+        }
+
+        // Copy Link to Clipboard
         copyButton.addEventListener("click", () => {
             navigator.clipboard.writeText(referralLink.value).then(() => {
-                alert("Referral link copied!");
+                showToast("Link copied successfully!");
             });
         });
 
-        // Share referral link on Telegram
-        const shareButton = document.getElementById("shareButton");
-        const userReferCode = "6OfEZccg"; // Dynamic user referral code
-
+        // Share on Telegram
         shareButton.addEventListener("click", () => {
-            const shareText = `Join me on this amazing platform! Use my referral code to get started: ${userReferCode}`;
-            const shareUrl = `https://t.me/share/url?url=https://example.com?ref=${userReferCode}&text=${encodeURIComponent(shareText)}`;
-            window.open(shareUrl, "_blank");
+            const telegramUrl = `https://t.me/share/url?url=${encodeURIComponent(referralLink.value)}&text=${encodeURIComponent(
+                "Join me on this amazing platform and earn rewards!"
+            )}`;
+            window.open(telegramUrl, "_blank");
         });
 
-        // Handle modal actions
-        const modalCopyButton = document.getElementById("modalCopyButton");
-        const modalShareButton = document.getElementById("modalShareButton");
-
-        modalCopyButton.addEventListener("click", () => {
-            navigator.clipboard.writeText(`https://example.com?ref=${userReferCode}`).then(() => {
-                alert("Referral link copied!");
-            });
-        });
-
-        modalShareButton.addEventListener("click", () => {
-            const shareText = `Join me using my referral link: ${userReferCode}`;
-            const shareUrl = `https://t.me/share/url?url=https://example.com?ref=${userReferCode}&text=${encodeURIComponent(shareText)}`;
-            window.open(shareUrl, "_blank");
-        });
+        // Fetch referral link on load
+        fetchReferralLink();
     </script>
-
 </body>
 
 </html>
