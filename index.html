@@ -76,6 +76,44 @@
             color: #00f7ff; /* Cyan color for text */
             text-shadow: 0 0 15px #00f7ff, 0 0 30px #00f7ff, 0 0 60px #00f7ff, 0 0 100px #00f7ff;
         }
+
+        /* Fox animation */
+        .fox-container {
+            position: absolute;
+            bottom: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: foxMove 5s infinite alternate ease-in-out;
+        }
+
+        @keyframes foxMove {
+            0% {
+                transform: translateX(-50%) translateY(0);
+            }
+            100% {
+                transform: translateX(-50%) translateY(-20px);
+            }
+        }
+
+        /* Fox SVG Icon */
+        .fox-icon {
+            width: 80px;
+            height: 80px;
+            fill: #ff9800;
+            animation: jump 1.5s infinite ease-in-out;
+        }
+
+        @keyframes jump {
+            0% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+            100% {
+                transform: translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -85,6 +123,17 @@
             <h1 class="futuristic-glow">Loading...</h1>
             <div class="spinner"></div>
         </div>
+    </div>
+
+    <!-- Animated Fox -->
+    <div class="fox-container">
+        <!-- Simple Fox SVG -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="fox-icon">
+            <circle cx="50" cy="50" r="40" fill="#ff9800" />
+            <circle cx="35" cy="40" r="5" fill="#fff" />
+            <circle cx="65" cy="40" r="5" fill="#fff" />
+            <path d="M35 60 Q50 75, 65 60" stroke="#fff" stroke-width="2" fill="transparent" />
+        </svg>
     </div>
 
     <script>
