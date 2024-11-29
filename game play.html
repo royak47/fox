@@ -135,6 +135,8 @@
         function startGame() {
             document.querySelector(".game-board").style.display = "block"; // Show game board
             document.querySelector(".play-button").style.display = "none"; // Hide play button
+            canvas.width = canvasSize;  // Set canvas width
+            canvas.height = canvasSize;  // Set canvas height
             document.addEventListener("keydown", changeDirection);
             setInterval(update, 100);
             generateFood();
