@@ -1,23 +1,129 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invite Friends</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
-    <link rel="stylesheet" href="material/css/st.css">
-</head>
-<body>
-    
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: linear-gradient(120deg, #1f2937, #111827);
+            color: #e5e7eb;
+            margin: 0;
+            padding: 0;
+        }
 
+        /* Invite Section */
+        .frens-invite {
+            margin: 50px auto;
+            padding: 20px;
+            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            border-radius: 12px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .frens-invite h2 {
+            color: #facc15;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .frens-invite-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .frens-invite-button input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #94a3b8;
+            border-radius: 8px;
+            width: 80%;
+            background: #1e293b;
+            color: #f8fafc;
+        }
+
+        .frens-invite-button button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            background-color: #34d399;
+            color: #111827;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .frens-invite-button button:hover {
+            background-color: #16a34a;
+        }
+
+        /* Notification */
+        .notification {
+            margin-top: 10px;
+            color: #facc15;
+            font-size: 14px;
+            display: none;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            display: flex;
+            justify-content: space-around;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(90deg, #0284c7, #2563eb);
+            padding: 10px 0;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .nav-item {
+            text-decoration: none;
+            color: #f8fafc;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .nav-item i {
+            font-size: 20px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .nav-item:hover {
+            color: #34d399;
+        }
+
+        @media (max-width: 600px) {
+            .frens-invite {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Invite Section -->
     <div class="frens-invite">
+        <h2><u>Invite Friends and Earn Rewards!</u></h2>
         <div class="frens-invite-button">
-            <input type="text" value="https://t.me/FOXOG_BOT/FOX" id="link" readonly>
+            <input type="text" id="link" readonly>
             <button id="copyButton">Copy Link</button>
         </div>
+        <div class="notification" id="notification">Link copied to clipboard!</div>
     </div>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
@@ -40,7 +146,30 @@
             <span>BALANCE</span>
         </a>
     </nav>
-    <script src="material/js/cojs.js"></script>
-    <script src="material/js/scripts.js"></script>
+
+    <!-- Scripts -->
+    <script>
+        // Generate Unique Link
+        const userId = Math.floor(Math.random() * 100000); // Simulating a unique user ID
+        const baseUrl = "https://t.me/FOXOG_BOT/";
+        const referralLink = `${baseUrl}FOX?ref=${userId}`;
+        document.getElementById("link").value = referralLink;
+
+        // Copy to Clipboard
+        document.getElementById("copyButton").addEventListener("click", () => {
+            const linkInput = document.getElementById("link");
+            linkInput.select();
+            linkInput.setSelectionRange(0, 99999); // For mobile devices
+            navigator.clipboard.writeText(linkInput.value);
+
+            // Show notification
+            const notification = document.getElementById("notification");
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 2000);
+        });
+    </script>
 </body>
+
 </html>
