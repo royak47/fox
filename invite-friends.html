@@ -11,8 +11,8 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(120deg, #1f2937, #111827);
-            color: #e5e7eb;
+            background: linear-gradient(120deg, #0f172a, #1e293b);
+            color: #e2e8f0;
             text-align: center;
         }
 
@@ -23,7 +23,7 @@
         .frens-invite {
             margin: 20px auto;
             padding: 20px;
-            background: linear-gradient(90deg, #2563eb, #3b82f6);
+            background: linear-gradient(90deg, #4f46e5, #6366f1);
             border-radius: 12px;
             width: 90%;
             max-width: 600px;
@@ -50,11 +50,11 @@
             border-radius: 8px;
             margin-right: 10px;
             background: #ffffff;
-            color: #111827;
+            color: #0f172a;
         }
 
         .frens-invite-buttons button {
-            background-color: #34d399;
+            background-color: #22c55e;
             color: white;
             border: none;
             padding: 10px 15px;
@@ -65,14 +65,14 @@
         }
 
         .frens-invite-buttons button:hover {
-            background-color: #059669;
+            background-color: #16a34a;
         }
 
         .copy-success {
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #34d399;
+            color: #22c55e;
             font-size: 16px;
             margin-top: 10px;
             visibility: hidden;
@@ -91,7 +91,7 @@
 
         .friend-stats {
             margin-top: 20px;
-            background: #374151;
+            background: #1e293b;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
@@ -105,7 +105,7 @@
         .friend-stats span {
             font-weight: bold;
             font-size: 22px;
-            color: #34d399;
+            color: #22c55e;
         }
 
         .bottom-nav {
@@ -113,7 +113,7 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            background: #111827;
+            background: #0f172a;
             display: flex;
             justify-content: space-around;
             padding: 10px 0;
@@ -137,7 +137,7 @@
         }
 
         .bottom-nav a:hover {
-            color: #34d399;
+            color: #22c55e;
         }
     </style>
 </head>
@@ -204,18 +204,28 @@
             });
         });
 
-        // Friend Invitation Logic
-        let friendCount = 0;
+        // Real-time Friend Count
         const friendCountElement = document.getElementById("friendCount");
 
-        // Simulate a friend joining (replace this logic with actual backend integration)
-        function friendJoined() {
-            friendCount += 1;
-            friendCountElement.textContent = friendCount;
+        async function fetchFriendCount() {
+            try {
+                // Replace with your API endpoint
+                const response = await fetch("https://your-backend-api.com/friend-count");
+                const data = await response.json();
+
+                if (data && data.friendCount !== undefined) {
+                    friendCountElement.textContent = data.friendCount;
+                }
+            } catch (error) {
+                console.error("Error fetching friend count:", error);
+            }
         }
 
-        // Simulate a friend joining every 5 seconds for demo purposes
-        setInterval(friendJoined, 5000);
+        // Fetch the friend count every 5 seconds
+        setInterval(fetchFriendCount, 5000);
+
+        // Initial fetch
+        fetchFriendCount();
     </script>
 </body>
 
