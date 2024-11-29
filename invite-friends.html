@@ -6,185 +6,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invite Friends</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="material/css/styles.css">
-    <link rel="stylesheet" href="material/css/st.css">
     <style>
-        body,
-        html {
+        body {
+            font-family: "Roboto", Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: #f8fafc;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
-            background: #1a1a1a;
-            color: white;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            text-align: center;
         }
 
-        .frens-invite {
-            margin-top: 50px;
-            width: 80%;
-            max-width: 500px;
-        }
-
-        .frens-invite-button {
-            background-color: #333;
-            border-radius: 8px;
+        #invite-container {
+            margin: 30px auto;
+            max-width: 600px;
             padding: 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
         }
 
-        .frens-invite-button input {
+        h1 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #e0f2fe;
+        }
+
+        p {
+            font-size: 16px;
+            color: #94a3b8;
+            margin-bottom: 20px;
+        }
+
+        input[type="text"] {
             width: 80%;
             padding: 10px;
-            margin: 10px 0;
-            border-radius: 5px;
             border: none;
-            background-color: #2e2e2e;
-            color: white;
-            text-align: center;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            background: #94a3b8;
+            color: #0f172a;
             font-size: 16px;
         }
 
-        .frens-invite-button button {
-            background-color: #4CAF50;
-            color: white;
+        .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #34d399, #059669);
+            color: #fff;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 8px;
             font-size: 16px;
-            margin-top: 10px;
+            text-decoration: none;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .frens-invite-button button:hover {
-            background-color: #45a049;
-        }
-
-        .referral-count {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
+        .btn:hover {
+            background: linear-gradient(135deg, #86efac, #34d399);
+            transform: scale(1.05);
         }
 
         .bottom-nav {
+            display: flex;
+            justify-content: space-around;
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: #333;
-            display: flex;
-            justify-content: space-around;
+            background: linear-gradient(135deg, #0284c7, #0369a1);
             padding: 10px 0;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .nav-item {
-            color: white;
+            text-decoration: none;
+            color: #fff;
             text-align: center;
             font-size: 14px;
-            text-decoration: none;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
         .nav-item i {
             font-size: 20px;
-            display: block;
+            margin-bottom: 5px;
         }
 
         .nav-item:hover {
-            color: #4CAF50;
+            color: #34d399;
         }
     </style>
 </head>
 
 <body>
-    <div class="frens-invite">
+    <div id="invite-container">
         <h1>Invite Your Friends</h1>
-        <p>Share your referral link to invite your friends and earn rewards!</p>
-
-        <!-- Referral Link Section -->
-        <div class="frens-invite-button">
-            <input type="text" value="Fetching your referral link..." id="referralLink" readonly>
-            <button id="copyButton">Copy Link</button>
-        </div>
-
-        <!-- Referral Count Section -->
-        <div class="referral-count">
-            <p>Total Referrals: <span id="referralCount">Loading...</span></p>
-        </div>
+        <p>Share your referral code and earn rewards when your friends join.</p>
+        <input type="text" id="referralCode" value="FOX12345" readonly>
+        <button class="btn" onclick="copyReferralCode()">Copy Code</button>
     </div>
 
-    <!-- Bottom navigation -->
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
-            <span>HOME</span>
+            <span>Home</span>
         </a>
-        <a href="GAME PLAY.html" class="nav-item">
-            <i class="fas fa-trophy"></i>
-            <span>GAME PLAY</span>
+        <a href="game.html" class="nav-item">
+            <i class="fas fa-gamepad"></i>
+            <span>Game</span>
         </a>
         <a href="invite-friends.html" class="nav-item">
             <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
+            <span>Friends</span>
         </a>
         <a href="task.html" class="nav-item">
             <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
+            <span>Tasks</span>
         </a>
         <a href="balance.html" class="nav-item">
             <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
+            <span>Balance</span>
         </a>
     </nav>
 
     <script>
-        const apiUrl = "https://67496dde868020296630f628.mockapi.io/Api/1/Fox"; // Your MockAPI link
-        const botLink = "https://t.me/FOXOG_BOT"; // Your bot link
-
-        const referralLinkInput = document.getElementById("referralLink");
-        const copyButton = document.getElementById("copyButton");
-        const referralCountElement = document.getElementById("referralCount");
-
-        // Fetch the user's unique referral code and count from MockAPI
-        async function fetchReferralData() {
-            try {
-                const response = await fetch(apiUrl);
-                if (!response.ok) throw new Error(`API responded with status ${response.status}`);
-
-                const users = await response.json();
-                if (users.length === 0) throw new Error("No users found in MockAPI.");
-
-                const currentUser = users[0]; // Assuming the first user in the list is the current user
-                const referralCode = currentUser.referralCode || "defaultCode";
-                const referralLink = `${botLink}?startapp=${referralCode}`;
-                const referralCount = currentUser.referralCount || 0; // Assuming `referralCount` is a field in your user model
-
-                // Display referral link and count
-                referralLinkInput.value = referralLink;
-                referralCountElement.textContent = referralCount;
-
-            } catch (error) {
-                referralLinkInput.value = "Error fetching referral link.";
-                referralCountElement.textContent = "Error fetching referral count.";
-                console.error("Error:", error.message);
-            }
+        function copyReferralCode() {
+            const code = document.getElementById("referralCode");
+            code.select();
+            code.setSelectionRange(0, 99999); // For mobile devices
+            navigator.clipboard.writeText(code.value);
+            alert("Referral code copied: " + code.value);
         }
-
-        // Copy the referral link to clipboard
-        copyButton.addEventListener("click", () => {
-            referralLinkInput.select();
-            navigator.clipboard.writeText(referralLinkInput.value);
-            alert("Referral link copied successfully!");
-        });
-
-        // Initialize
-        fetchReferralData();
     </script>
-
 </body>
 
 </html>
