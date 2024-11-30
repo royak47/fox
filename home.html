@@ -62,6 +62,23 @@
             }
         }
 
+        #mining-button {
+            background: linear-gradient(135deg, #34d399, #059669);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+
+        #mining-button:hover {
+            background: linear-gradient(135deg, #86efac, #34d399);
+            transform: scale(1.05);
+        }
+
         .countdown {
             font-size: 18px;
             color: #ff80bf;
@@ -101,9 +118,10 @@
     <div class="container">
         <h1>Welcome to Fox Mining</h1>
         <div class="logo-wrapper">
-            <img src="fox-logo.png" alt="Fox Logo">
+            <img src="logo.png" alt="Fox Logo">
         </div>
-        <div id="countdown" class="countdown">Time Remaining: 24:00:00</div>
+        <button id="mining-button" onclick="startMining()">Start Mining</button>
+        <div id="countdown" class="countdown"></div>
     </div>
 
     <!-- Bottom Navigation -->
@@ -131,20 +149,34 @@
     </nav>
 
     <script>
+        const MINING_STORAGE_KEY = "miningStartTime";
+        const REWARD_MESSAGE = "You received 10 Fox!";
         const countdownElement = document.getElementById("countdown");
+        const miningButton = document.getElementById("mining-button");
 
-        function startCountdown() {
+        function startMining() {
             const now = new Date().getTime();
             const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-            const endTime = now + cooldownTime;
 
-            const updateTimer = setInterval(() => {
-                const currentTime = new Date().getTime();
-                const remainingTime = endTime - currentTime;
+            localStorage.setItem(MINING_STORAGE_KEY, now.toString());
+            miningButton.style.display = "none";
+            countdownElement.innerText = `Mining started! Come back in 24:00:00.`;
+
+            startCountdown(cooldownTime);
+        }
+
+        function startCountdown(cooldownTime) {
+            const startTime = parseInt(localStorage.getItem(MINING_STORAGE_KEY), 10);
+            const endTime = startTime + cooldownTime;
+
+            const timer = setInterval(() => {
+                const now = new Date().getTime();
+                const remainingTime = endTime - now;
 
                 if (remainingTime <= 0) {
-                    clearInterval(updateTimer);
-                    countdownElement.innerText = "Time Remaining: 00:00:00";
+                    clearInterval(timer);
+                    countdownElement.innerText = REWARD_MESSAGE;
+                    miningButton.style.display = "block";
                 } else {
                     const hours = String(Math.floor(remainingTime / (1000 * 60 * 60))).padStart(2, "0");
                     const minutes = String(Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
@@ -154,8 +186,22 @@
             }, 1000);
         }
 
-        // Initialize countdown on page load
-        window.onload = startCountdown;
+        function initialize() {
+            const startTime = localStorage.getItem(MINING_STORAGE_KEY);
+            const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+
+            if (startTime) {
+                const now = new Date().getTime();
+                const elapsedTime = now - parseInt(startTime, 10);
+
+                if (elapsedTime < cooldownTime) {
+                    miningButton.style.display = "none";
+                    startCountdown(cooldownTime - elapsedTime);
+                }
+            }
+        }
+
+        window.onload = initialize;
     </script>
 </body>
 
