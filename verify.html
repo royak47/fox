@@ -14,15 +14,42 @@
             color: #f8fafc;
             margin: 0;
             padding: 0;
+            overflow: hidden;
         }
 
+        /* Loader styling */
+        #loader {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: #0f172a;
+        }
+
+        #loader img {
+            width: 100px;
+        }
+
+        /* Main content styling */
         #verify-container {
+            display: none; /* Hidden initially */
             margin: 30px auto;
             max-width: 600px;
             padding: 20px;
             background: linear-gradient(135deg, #3b82f6, #1e40af);
             border-radius: 12px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
 
         h1 {
@@ -31,7 +58,7 @@
             color: #e0f2fe;
         }
 
-        img {
+        img.verification-image {
             width: 200px;
             margin-bottom: 20px;
             border-radius: 12px;
@@ -89,9 +116,15 @@
 </head>
 
 <body>
+    <!-- Loader -->
+    <div id="loader">
+        <img src="material/images/loading.gif" alt="Loading">
+    </div>
+
+    <!-- Main Content -->
     <div id="verify-container">
         <h1>Verify and Earn</h1>
-        <img src="material/images/ver.gif" alt="Verification">
+        <img src="material/images/ver.gif" alt="Verification" class="verification-image">
         <p>Complete verification to earn rewards.</p>
         <a href="task.html" class="btn" onclick="completeTask(200, 'verify.html')">🦊 Verify</a>
     </div>
@@ -102,8 +135,8 @@
             <i class="fas fa-home"></i>
             <span>Home</span>
         </a>
-        <a href="game play.html" class="nav-item">
-            <i class="fas fa-game playpad"></i>
+        <a href="game-play.html" class="nav-item">
+            <i class="fas fa-gamepad"></i>
             <span>GAME PLAY</span>
         </a>
         <a href="invite-friends.html" class="nav-item">
@@ -119,6 +152,21 @@
             <span>Balance</span>
         </a>
     </nav>
+
+    <script>
+        // Simulate loading delay
+        window.onload = function () {
+            setTimeout(() => {
+                document.getElementById("loader").style.display = "none"; // Hide loader
+                document.getElementById("verify-container").style.display = "block"; // Show main content
+            }, 2000); // 2-second delay
+        };
+
+        function completeTask(reward, redirectUrl) {
+            alert(`Task completed! You earned ${reward} points.`);
+            window.location.href = redirectUrl;
+        }
+    </script>
 </body>
 
 </html>
