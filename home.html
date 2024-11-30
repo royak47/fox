@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home - Fox Mining</title>
+    <title>Fox Mining</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="material/css/styles.css">
     <style>
@@ -28,37 +28,44 @@
             margin-bottom: 20px;
         }
 
-        .mining-section {
-            background: linear-gradient(135deg, #3b82f6, #1e40af);
-            padding: 20px;
-            border-radius: 12px;
-            color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            text-align: center;
-            margin: 20px auto;
-            max-width: 90%;
+        .logo-wrapper {
+            position: relative;
+            margin: 50px auto;
+            width: 150px;
+            height: 150px;
         }
 
-        .mining-section button {
-            background: linear-gradient(135deg, #34d399, #059669);
-            color: #fff;
-            border: none;
-            padding: 12px 20px;
-            font-size: 16px;
-            cursor: pointer;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+        .logo-wrapper img {
+            width: 100%;
+            border-radius: 50%;
+            box-shadow: 0 0 15px #ff00e0, 0 0 30px #ff00e0;
         }
 
-        .mining-section button:hover {
-            background: linear-gradient(135deg, #86efac, #34d399);
-            transform: scale(1.05);
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            right: -10px;
+            bottom: -10px;
+            border: 2px dotted #ff00e0;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
         }
 
-        .cooldown-message {
-            margin-top: 10px;
-            font-size: 14px;
-            color: #facc15;
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 15px #ff00e0, 0 0 30px #ff00e0;
+            }
+            50% {
+                box-shadow: 0 0 25px #ff00e0, 0 0 50px #ff00e0;
+            }
+        }
+
+        .countdown {
+            font-size: 18px;
+            color: #ff80bf;
+            margin-top: 20px;
         }
 
         .bottom-nav {
@@ -93,21 +100,20 @@
 <body>
     <div class="container">
         <h1>Welcome to Fox Mining</h1>
-        <div class="mining-section">
-            <h2>Start Mining</h2>
-            <p id="status-message">Earn rewards by mining for 24 hours.</p>
-            <button id="start-mining" onclick="startMining()">Start Mining</button>
-            <div id="cooldown-message" class="cooldown-message"></div>
+        <div class="logo-wrapper">
+            <img src="fox-logo.png" alt="Fox Logo">
         </div>
+        <div id="countdown" class="countdown">Time Remaining: 24:00:00</div>
     </div>
 
+    <!-- Bottom Navigation -->
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <i class="fas fa-home"></i>
             <span>HOME</span>
         </a>
-        <a href="game play.html" class="nav-item">
-            <i class="fas fa-game playpad"></i>
+        <a href="game-play.html" class="nav-item">
+            <i class="fas fa-gamepad"></i>
             <span>GAME PLAY</span>
         </a>
         <a href="invite-friends.html" class="nav-item">
@@ -125,49 +131,31 @@
     </nav>
 
     <script>
-        // Local storage key for mining start time
-        const MINING_STORAGE_KEY = "miningStartTime";
+        const countdownElement = document.getElementById("countdown");
 
-        function startMining() {
+        function startCountdown() {
             const now = new Date().getTime();
             const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-            const lastStartTime = localStorage.getItem(MINING_STORAGE_KEY);
+            const endTime = now + cooldownTime;
 
-            if (lastStartTime && now - lastStartTime < cooldownTime) {
-                // Still in cooldown
-                const remainingTime = cooldownTime - (now - lastStartTime);
-                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("cooldown-message").innerText =
-                    `Mining cooldown active. Try again in ${hours}h ${minutes}m.`;
-            } else {
-                // Start mining
-                localStorage.setItem(MINING_STORAGE_KEY, now.toString());
-                document.getElementById("cooldown-message").innerText = "Mining started! Come back in 24 hours.";
-                document.getElementById("status-message").innerText = "Happy Mining!";
-            }
+            const updateTimer = setInterval(() => {
+                const currentTime = new Date().getTime();
+                const remainingTime = endTime - currentTime;
+
+                if (remainingTime <= 0) {
+                    clearInterval(updateTimer);
+                    countdownElement.innerText = "Time Remaining: 00:00:00";
+                } else {
+                    const hours = String(Math.floor(remainingTime / (1000 * 60 * 60))).padStart(2, "0");
+                    const minutes = String(Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60))).padStart(2, "0");
+                    const seconds = String(Math.floor((remainingTime % (1000 * 60)) / 1000)).padStart(2, "0");
+                    countdownElement.innerText = `Time Remaining: ${hours}:${minutes}:${seconds}`;
+                }
+            }, 1000);
         }
 
-        // Initialize cooldown message on page load
-        function updateCooldownMessage() {
-            const now = new Date().getTime();
-            const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
-            const lastStartTime = localStorage.getItem(MINING_STORAGE_KEY);
-
-            if (lastStartTime && now - lastStartTime < cooldownTime) {
-                const remainingTime = cooldownTime - (now - lastStartTime);
-                const hours = Math.floor(remainingTime / (1000 * 60 * 60));
-                const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("cooldown-message").innerText =
-                    `Mining cooldown active. Try again in ${hours}h ${minutes}m.`;
-            } else {
-                document.getElementById("cooldown-message").innerText = "";
-                document.getElementById("status-message").innerText = "Earn rewards by mining for 24 hours.";
-            }
-        }
-
-        // Run on page load
-        window.onload = updateCooldownMessage;
+        // Initialize countdown on page load
+        window.onload = startCountdown;
     </script>
 </body>
 
