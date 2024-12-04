@@ -10,7 +10,7 @@
     <style>
         body {
             font-family: 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: #000;
             color: #f8fafc;
             text-align: center;
             margin: 0;
@@ -18,55 +18,45 @@
         }
 
         .logo-wrapper {
-            position: relative;
-            text-align: center;
             margin: 50px auto;
-            width: 300px;
-            height: 300px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
+            text-align: center;
         }
 
         .centered-logo {
-            width: 150px;
-            height: 150px;
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            box-shadow: 0 0 20px 5px #ff1493, 0 0 30px 10px #ff1493 inset;
-            animation: neon-pulse 1.5s infinite alternate;
+            margin-bottom: 20px;
         }
 
-        @keyframes neon-pulse {
-            0% {
-                box-shadow: 0 0 20px #ff1493, 0 0 30px #ff1493 inset;
-            }
-
-            100% {
-                box-shadow: 0 0 30px #ff69b4, 0 0 50px #ff69b4 inset;
-            }
+        #action-area {
+            margin-top: 20px;
         }
 
         #start-mining {
-            margin-top: 20px;
+            display: inline-block;
+            width: 200px;
+            height: 50px;
             background: linear-gradient(135deg, #34d399, #059669);
             color: #fff;
             border: none;
-            padding: 12px 20px;
             font-size: 16px;
+            font-weight: bold;
             cursor: pointer;
-            border-radius: 8px;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
         }
 
         #start-mining:hover {
             background: linear-gradient(135deg, #86efac, #34d399);
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
 
         #countdown {
-            margin-top: 20px;
-            font-size: 24px;
+            margin-top: 10px;
+            font-size: 18px;
             font-weight: bold;
             color: #facc15;
         }
@@ -75,10 +65,11 @@
             position: fixed;
             bottom: 0;
             width: 100%;
-            background: linear-gradient(135deg, #0284c7, #0369a1);
+            background: #1e293b;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: space-around;
-            padding: 10px 0;
+            padding: 15px 0;
         }
 
         .nav-item {
@@ -86,16 +77,39 @@
             color: #fff;
             text-align: center;
             font-size: 14px;
+            font-weight: bold;
+            transition: color 0.3s ease;
         }
 
         .nav-item i {
-            font-size: 20px;
+            font-size: 24px;
             display: block;
             margin-bottom: 5px;
+            transition: transform 0.3s ease;
         }
 
         .nav-item:hover {
             color: #34d399;
+        }
+
+        .nav-item:hover i {
+            transform: scale(1.2);
+        }
+
+        .nav-item span {
+            font-size: 12px;
+            text-transform: uppercase;
+        }
+
+        .nav-item-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0369a1, #0284c7);
+            border-radius: 15px;
+            justify-content: center;
         }
     </style>
 </head>
@@ -110,56 +124,63 @@
 
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
-            <i class="fas fa-home"></i>
-            <span>HOME</span>
+            <div class="nav-item-container">
+                <i class="fas fa-home"></i>
+                <span>Home</span>
+            </div>
         </a>
         <a href="game-play.html" class="nav-item">
-            <i class="fas fa-gamepad"></i>
-            <span>GAME PLAY</span>
+            <div class="nav-item-container">
+                <i class="fas fa-gamepad"></i>
+                <span>Game</span>
+            </div>
         </a>
         <a href="invite-friends.html" class="nav-item">
-            <i class="fas fa-user-friends"></i>
-            <span>FRIENDS</span>
+            <div class="nav-item-container">
+                <i class="fas fa-user-friends"></i>
+                <span>Friends</span>
+            </div>
         </a>
         <a href="task.html" class="nav-item">
-            <i class="fas fa-tasks"></i>
-            <span>TASKS</span>
+            <div class="nav-item-container">
+                <i class="fas fa-tasks"></i>
+                <span>Tasks</span>
+            </div>
         </a>
         <a href="balance.html" class="nav-item">
-            <i class="fas fa-wallet"></i>
-            <span>BALANCE</span>
+            <div class="nav-item-container">
+                <i class="fas fa-wallet"></i>
+                <span>Balance</span>
+            </div>
         </a>
     </nav>
 
     <script>
         const MINING_STORAGE_KEY = "miningStartTime";
-        const cooldownTime = 24 * 60 * 60 * 1000; // 24 hours in milliseconds
+        const cooldownTime = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
 
         function startMining() {
             const now = new Date().getTime();
             const lastStartTime = localStorage.getItem(MINING_STORAGE_KEY);
 
             if (!lastStartTime || now - lastStartTime >= cooldownTime) {
-                // Start mining
                 localStorage.setItem(MINING_STORAGE_KEY, now.toString());
-                document.getElementById("action-area").innerHTML =
-                    `<div id="countdown"></div>`;
+                document.getElementById("start-mining").disabled = true;
                 startCountdown(now + cooldownTime);
                 alert("You earned 10 FOX!");
             }
         }
 
         function startCountdown(endTime) {
-            const countdownElement = document.getElementById("countdown");
+            const button = document.getElementById("start-mining");
 
             function updateCountdown() {
                 const now = new Date().getTime();
                 const remainingTime = endTime - now;
 
                 if (remainingTime <= 0) {
-                    countdownElement.innerHTML = "Mining completed! Start again.";
-                    document.getElementById("action-area").innerHTML =
-                        `<button id="start-mining" onclick="startMining()">Start Mining</button>`;
+                    button.disabled = false;
+                    button.innerHTML = "Start Mining";
                     clearInterval(timerInterval);
                     return;
                 }
@@ -168,7 +189,7 @@
                 const minutes = Math.floor((remainingTime % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((remainingTime % (1000 * 60)) / 1000);
 
-                countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
+                button.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
             }
 
             updateCountdown();
@@ -180,10 +201,8 @@
             const lastStartTime = localStorage.getItem(MINING_STORAGE_KEY);
 
             if (lastStartTime && now - lastStartTime < cooldownTime) {
-                // Resume countdown
                 const endTime = parseInt(lastStartTime) + cooldownTime;
-                document.getElementById("action-area").innerHTML =
-                    `<div id="countdown"></div>`;
+                document.getElementById("start-mining").disabled = true;
                 startCountdown(endTime);
             }
         }
