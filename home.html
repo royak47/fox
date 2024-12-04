@@ -55,15 +55,15 @@
 
         #start-mining {
             display: inline-block;
-            width: 200px;
-            height: 50px;
+            width: 220px;
+            height: 60px;
             background: linear-gradient(135deg, #34d399, #059669);
             color: #fff;
             border: none;
-            font-size: 16px;
+            font-size: 18px;
             font-weight: bold;
             cursor: pointer;
-            border-radius: 25px;
+            border-radius: 30px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             text-transform: uppercase;
         }
@@ -87,13 +87,6 @@
             100% {
                 transform: scale(1);
             }
-        }
-
-        #countdown {
-            font-size: 28px;
-            font-weight: bold;
-            color: #facc15;
-            margin: 30px 0;
         }
 
         .bottom-nav {
@@ -155,8 +148,6 @@
         <button id="start-mining" onclick="startMining()">Start Mining</button>
     </div>
 
-    <div id="countdown">6h 0m 0s</div>
-
     <nav class="bottom-nav">
         <a href="home.html" class="nav-item">
             <div class="nav-item-container">
@@ -208,7 +199,6 @@
         }
 
         function startCountdown(endTime) {
-            const countdownElement = document.getElementById("countdown");
             const button = document.getElementById("start-mining");
 
             function updateCountdown() {
@@ -228,7 +218,6 @@
 
                 button.disabled = true;
                 button.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
-                countdownElement.innerHTML = `${hours}h ${minutes}m ${seconds}s`;
             }
 
             updateCountdown();
