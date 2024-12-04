@@ -11,7 +11,7 @@
             font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Hide overflow to prevent scrollbars */
+            overflow: hidden;
             color: #f8fafc;
             position: relative;
         }
@@ -23,9 +23,9 @@
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover; /* Cover the entire background */
-            z-index: -1; /* Place it behind content */
-            opacity: 0.8; /* Slight transparency for better text visibility */
+            object-fit: cover;
+            z-index: -1;
+            opacity: 0.8;
         }
 
         /* Overlay to darken the background */
@@ -35,8 +35,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.4); /* Semi-transparent overlay */
-            z-index: -1; /* Keep it behind the content */
+            background: rgba(0, 0, 0, 0.4);
+            z-index: -1;
         }
 
         .points {
@@ -105,6 +105,11 @@
             justify-content: space-around;
             padding: 15px 0;
             border-radius: 15px 15px 0 0;
+            transition: all 0.3s ease;
+        }
+
+        .bottom-nav.shrink {
+            padding: 8px 0;
         }
 
         .nav-item {
@@ -169,31 +174,39 @@
         <button id="start-mining" onclick="startMining()">Start Mining</button>
     </div>
 
-    </div>
-        <br> <br>
-        <img src="material/images/logo.png" width="50%">
-                <nav class="bottom-nav">
-            <a href="home.html" class="nav-item">
+    <nav class="bottom-nav" id="bottom-nav">
+        <a href="home.html" class="nav-item">
+            <div class="nav-item-container">
                 <i class="fas fa-home"></i>
-                <span>HOME</span>
-            </a>
-            <a href="game play.html" class="nav-item">
-                <i class="fas fa-trophy"></i>
-                <span>GAME PLAY</span>
-            </a>
-            <a href="invite-friends.html" class="nav-item">
+                <span>Home</span>
+            </div>
+        </a>
+        <a href="game-play.html" class="nav-item">
+            <div class="nav-item-container">
+                <i class="fas fa-gamepad"></i>
+                <span>Game</span>
+            </div>
+        </a>
+        <a href="invite-friends.html" class="nav-item">
+            <div class="nav-item-container">
                 <i class="fas fa-user-friends"></i>
-                <span>FRIENDS</span>
-            </a>
-            <a href="task.html" class="nav-item">
+                <span>Friends</span>
+            </div>
+        </a>
+        <a href="task.html" class="nav-item">
+            <div class="nav-item-container">
                 <i class="fas fa-tasks"></i>
-                <span>TASKS</span>
-            </a>
-            <a href="balance.html" class="nav-item">
+                <span>Tasks</span>
+            </div>
+        </a>
+        <a href="balance.html" class="nav-item">
+            <div class="nav-item-container">
                 <i class="fas fa-wallet"></i>
-                <span>BALANCE</span>
-            </a>
-        </nav>
+                <span>Balance</span>
+            </div>
+        </a>
+    </nav>
+
     <script>
         const MINING_STORAGE_KEY = "miningStartTime";
         const cooldownTime = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
@@ -213,9 +226,15 @@
                 const logo = document.getElementById("fox-logo");
                 logo.classList.add("glow");
 
+                // Decrease the size of bottom nav buttons
+                const bottomNav = document.getElementById("bottom-nav");
+                bottomNav.classList.add("shrink");
+
+                // Glow effect remains for 6 hours
                 setTimeout(() => {
                     logo.classList.remove("glow");
-                }, 3000); // Glow effect lasts 3 seconds
+                    bottomNav.classList.remove("shrink");
+                }, cooldownTime); // Glow effect lasts 6 hours
             }
         }
 
@@ -249,7 +268,7 @@
             document.getElementById("mining-points").innerHTML = `Mining Points: ${miningPoints}`;
         }
 
-        function initializePage() {
+        window.onload = function () {
             const now = new Date().getTime();
             const lastStartTime = localStorage.getItem(MINING_STORAGE_KEY);
 
@@ -257,9 +276,7 @@
                 const endTime = parseInt(lastStartTime) + cooldownTime;
                 startCountdown(endTime);
             }
-        }
-
-        window.onload = initializePage;
+        };
     </script>
 </body>
 
